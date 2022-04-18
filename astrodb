@@ -1,0 +1,105 @@
+// 9.1.  Swiss Ephemeris API
+// We give a short overview of the most important functions contained in the Swiss Ephemeris DLL. The detailed description of the programming interface is contained in the document swephprg.doc which is distributed together with the file you are reading.
+
+// 9.1.1.  Calculation of planets and stars
+// /* planets, Moon, asteroids, lunar nodes, apogees, fictitious bodies;
+
+//  * input time must be ET/TT */
+
+// swe_calc(); 
+
+// /* same, but input time must be UT */
+
+// swe_calc_ut(); 
+
+// /* fixed stars; input time must be ET/TT */
+
+// swe_fixstar(); 
+
+// /* fixed stars; input time must be UT */
+
+// swe_fixstar_ut();
+
+// 9.1.2.  Date and time conversion
+// /* delta t from Julian day number
+
+//  * Ephemeris time (ET) = Universal time (UT) + swe_deltat(UT)*/
+
+// swe_deltat();
+
+// /* Julian day number from year, month, day, hour, */
+
+// swe_date_conversion();      
+
+// /* Julian day number from year, month, day, hour */
+
+// swe_julday();    
+
+// /* year, month, day, hour from Julian day number */
+
+// swe_revjul();
+
+// /* UTC to Julian day number */
+
+// swe_utc_to_jd();
+
+// /* Julian day number TT to UTC */
+
+// swe_jdet_to_utc();
+
+// /* Julian day number UT1 to UTC */
+
+// swe_jdut1_to_utc();
+
+// /* utc to time zone or time zone to utc*/
+
+// swe_utc_time_zone();
+
+// /* get tidal acceleration used in swe_deltat() */
+
+// swe_get_tid_acc();
+
+// /* set tidal acceleration to be used in swe_deltat() */
+
+// swe_set_tid_acc();
+
+// 9.1.3.  Initialization, setup, and closing functions
+// /* set directory path of ephemeris files */
+
+// swe_set_ephe_path();
+
+// /* set name of JPL ephemeris file */
+
+// swe_set_jpl_file();
+
+// /* close Swiss Ephemeris */
+
+// swe_close();
+
+// 9.1.4.  House calculation
+// /* sidereal time */
+
+// swe_sidtime(); 
+
+// /* house cusps, ascendant, MC, armc, vertex */
+
+// swe_houses();  
+
+// 9.1.5.  Auxiliary functions
+// /* coordinate transformation, from ecliptic to equator or vice-versa. */
+
+// swe_cotrans(); 
+
+// /* coordinate transformation of position and speed,
+
+//  * from ecliptic to equator or vice-versa*/
+
+// swe_cotrans_sp();
+
+// /* get the name of a planet */
+
+// swe_get_planet_name();
+
+// /* normalization of any degree number to the range 0 ... 360 */
+
+// swe_degnorm();
