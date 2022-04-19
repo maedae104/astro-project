@@ -9,8 +9,17 @@ app = Flask(__name__   )
 @app.route('/')
 def index():
 
-    return render_template("hompage.html")
+    return render_template('homepage.html')
 
+
+@app.route('/transits')
+def get_transits():
+
+    sun_sign = "The sun is in Aries"
+    moon_sign = "The moon is in Libra"
+    moon_phase = "The moon is full"
+
+    return render_template('transits.html', moon_sign=moon_sign, moon_phase=moon_phase, sun_sign=sun_sign)
 
 @app.route("/users", methods=["POST"])
 def create_user():
@@ -55,4 +64,5 @@ def logout():
     return render_template("hompage.html")
 
 
-
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=True)
