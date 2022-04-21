@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block title %}Astrology Forecast{% endblock %}
+
+{% block body %}
+  <h1>What's the sky doing today?</h1>
+
+  <h2>Take me to the sky!</h2>
+  <ul>
+    <input type="hidden" name="Language" id="dateHidden">
+    <input type="submit" id="date-submit">
+  </ul>
+
+  <h2>Create an Account</h2>
+  <form action="/users" method="POST">
+    <p>
+      Email <input type="text" name="email">
+    </p>
+
+    <p>
+      Password <input type="password" name="password">
+    </p>
+
+    <p>
+      <input type="submit">
+    </p>
+  </form>
+  
+  <h2>Log In</h2>
+  <form action="/login" method="POST">
+    <p>
+      Email <input type="text" name="email">
+    </p>
+
+    <p>
+      Password <input type="password" name="password">
+    </p>
+
+    <p>
+      <input type="submit">
+    </p>
+  </form>
+
+{% endblock %}
+</body>
+</html>

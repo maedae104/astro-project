@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Current Transits{% endblock %}
+
+{% block body %}
+
+<h2>Today's Date is : </h2>
+
+<h3> The moon is currently in: {{ moon_sign }} </h3>
+<h3>The sun is in: {{ sun_sign }}  </h3>
+<h3>The moon is in it's {{ moon_phase }} phase </h3>
+
+
+{% endblock %}
