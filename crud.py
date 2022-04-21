@@ -1,40 +1,25 @@
 import json
 import swisseph as swe
-
-def get_moon_phase():
-    pass
-
-def create_user(email, password):
-    """Create and return a new user."""
-
-    user = User(email=email, password=password)
-
-    return user
-
-def check_user_email(x_email):
-    
-    return User.query.filter(User.email == x_email).first()
-
-def get_user_password(x_email, x_password):
-
-    x_user = User.query.filter(User.email == x_email).first()   
-    return x_user.password
-
-
+import web_scrape
 
 swe.set_ephe_path('/usr/share/sweph/ephe')
 
-converted_date = swe.julday(2022, 4, 19)
+
+current_date = "Apr20"
+converted_date = swe.julday(2022, 4, 20)
+
 
 sun_calcs = swe.calc_ut(converted_date, 0)
 moon_calcs = swe.calc_ut(converted_date, 1)
+merc_calcs = swe.calc_ut(converted_date, 2)
 
 sun_ecl_long = sun_calcs[0][0]
 moon_ecl_long = moon_calcs[0][0]
+merc_ecl_long = merc_calcs[0][0]
 
 def calculate_sign(ecl_long):
     sign_degrees = ecl_long
-    
+
     if sign_degrees > 0 and sign_degrees < 30:
         return "Aries"
 
@@ -71,4 +56,24 @@ def calculate_sign(ecl_long):
     elif sign_degrees > 330 and sign_degrees < 360:
         return "Pisces"
 
+def get_moon_phase(current_date):
+    xmoon_dict = web_scrape.moon_dict
+    if current_date in xmoon_dict.keys():
+        return xmoon_dict[current_date]
+
+def create_user(email, password):
+    """Create and return a new user."""
+
+    user = User(email=email, password=password)
+
+    return user
+
+def check_user_email(x_email):
+    
+    return User.query.filter(User.email == x_email).first()
+
+def get_user_password(x_email, x_password):
+
+    x_user = User.query.filter(User.email == x_email).first()   
+    return x_user.password
 
