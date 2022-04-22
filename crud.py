@@ -1,11 +1,15 @@
 import json
 import swisseph as swe
 import web_scrape
+from model import connect_to_db, db, User, Transit, TextUpdates
+from datetime import date
+from flask_sqlalchemy import SQLAlchemy
 
 swe.set_ephe_path('/usr/share/sweph/ephe')
 
-
-current_date = "Apr20"
+today = date.today()
+current_date = today.strftime("%b%d")
+print(current_date)
 converted_date = swe.julday(2022, 4, 20)
 
 
@@ -59,7 +63,7 @@ def calculate_sign(ecl_long):
 def get_moon_phase(current_date):
     xmoon_dict = web_scrape.moon_dict
     if current_date in xmoon_dict.keys():
-        return xmoon_dict[current_date]
+        return xmoon_dict[current_date][0]
 
 def create_user(email, password):
     """Create and return a new user."""
@@ -77,3 +81,6 @@ def get_user_password(x_email, x_password):
     x_user = User.query.filter(User.email == x_email).first()   
     return x_user.password
 
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app)

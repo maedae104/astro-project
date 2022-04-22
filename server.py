@@ -1,7 +1,17 @@
-from flask import Flask, redirect, url_for, render_template, request, flash
+from flask import (Flask, redirect, url_for, render_template, request,
+                    flash, session)
+import crud
+import web_scrape
+from model import connect_to_db, db, User, Transit, TextUpdates
+from datetime import date
+
+from jinja2 import StrictUndefined
+
 
 
 app = Flask(__name__   )
+app.secret_key = "dev"
+app.jinja_env.undefined = StrictUndefined
 
 '''This is the server'''
 
@@ -14,20 +24,23 @@ def index():
 
 @app.route('/transits')
 def get_transits():
+    sun_long= crud.sun_ecl_long
+    sun_sign = crud.calculate_sign(sun_long)
+    moon_long = crud.moon_ecl_long
+    moon_sign = crud.calculate_sign(moon_long)
+    current_date = crud.current_date
+    moon_phase = crud.get_moon_phase(current_date)
 
-    sun_sign = "The sun is in Aries"
-    moon_sign = "The moon is in Libra"
-    moon_phase = "The moon is full"
+    return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign, moon_long=moon_long, moon_sign=moon_sign, current_date=current_date,  moon_phase=moon_phase)
 
-    return render_template('transits.html', moon_sign=moon_sign, moon_phase=moon_phase, sun_sign=sun_sign)
-
-@app.route("/users", methods=["POST"])
+@app.route("/", methods=["POST"])
 def create_user():
 
     email = request.form.get("email")
     password = request.form.get("password")
+    phone_number = request.form.get("phone_number")
     output = crud.check_user_email(email)
-    new_user = User(email=email, password=password)
+    new_user = User(email=email, password=password, phone_number=phone_number)
 
     if output != None:
         flash("OH NO, that users email already exists.")
@@ -56,7 +69,7 @@ def user_login():
         else:
             flash("Those passwords don't match.")
     
-    return redirect("/")
+    return redirect("/", user=user)
 
 @app.route('/user-logout')
 def logout():

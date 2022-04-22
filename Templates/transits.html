@@ -3,11 +3,13 @@
 
 {% block body %}
 
-<h2>Today's Date is : </h2>
+<h2>Today's Date is : {{ current_date }} </h2>
 
-<h3> The moon is currently in: {{ moon_sign }} </h3>
 <h3>The sun is in: {{ sun_sign }}  </h3>
-<h3>The moon is in it's {{ moon_phase }} phase </h3>
+<h3>The moon is in: {{ moon_sign }} </h3>
+<h3>The moon phase is in: {{ moon_phase }} </h3>   
+
+
 
 
 {% endblock %}
