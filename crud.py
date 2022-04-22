@@ -8,9 +8,13 @@ from flask_sqlalchemy import SQLAlchemy
 swe.set_ephe_path('/usr/share/sweph/ephe')
 
 today = date.today()
+c_today = today.strftime("%Y %m %d")
+c_today = c_today.split(' ')
+year = int(c_today[0])
+month = int(c_today[1])
+day = int(c_today[2])
 current_date = today.strftime("%b%d")
-print(current_date)
-converted_date = swe.julday(2022, 4, 20)
+converted_date = swe.julday(year, month, day)
 
 
 sun_calcs = swe.calc_ut(converted_date, 0)
@@ -72,14 +76,14 @@ def create_user(email, password):
 
     return user
 
-def check_user_email(x_email):
+def get_user_by_email(email):
     
-    return User.query.filter(User.email == x_email).first()
+    return User.query.filter(User.email == email).first()
 
-def get_user_password(x_email, x_password):
+def get_user_password(email, password):
 
-    x_user = User.query.filter(User.email == x_email).first()   
-    return x_user.password
+    user = User.query.filter(User.email == email).first()   
+    return user.password
 
 if __name__ == '__main__':
     from server import app

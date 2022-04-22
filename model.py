@@ -20,16 +20,15 @@ class User(db.Model):
     __tablename__ = "users"
 
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    username = db.Column(db.String(25), unique=True)
     email = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(25), nullable=False)
-    phone_number = db.Column(db.String(12), nullable=False)
+    phone_number = db.Column(db.String(12), nullable=True)
 
     # text_update = db.relationship("TextUpdates", back_populates="user")
 
 
     def __repr__(self):
-            return f'<User: user_id={self.user_id}, Username={self.username}, email={self.email}, phone_number={self.phone_number}, text_update={self.phone_number}>'
+            return f'<User: user_id={self.user_id}, email={self.email}, phonenumber={self.phone_number}>'
 
 class Transit(db.Model):
 

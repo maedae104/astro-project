@@ -33,7 +33,7 @@ def get_transits():
 
     return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign, moon_long=moon_long, moon_sign=moon_sign, current_date=current_date,  moon_phase=moon_phase)
 
-@app.route("/", methods=["POST"])
+@app.route("/users", methods=["POST"])
 def create_user():
 
     email = request.form.get("email")
@@ -54,22 +54,35 @@ def create_user():
 @app.route("/login", methods=["POST"])
 def user_login():
 
+    # email = request.form.get("email")
+    # password = request.form.get("password")
+    
+    # user = crud.check_user_email(email)
+
+
+    # if user == None:
+    #     flash("Please create an account.")
+    # else:
+    #     if crud.get_user_password(email, password) == password:
+    #         flash("You are logged in.")
+    #         session["current_user"] = user.user_id
+    #     else:
+    #         flash("Those passwords don't match.")
+    
+    # return redirect("/")
+
     email = request.form.get("email")
     password = request.form.get("password")
-    
-    user = crud.check_user_email(email)
 
-
-    if user == None:
-        flash("Please create an account.")
+    user = crud.get_user_by_email(email)
+    if not user or user.password != password:
+        flash("The email or password you entered was incorrect.")
     else:
-        if crud.get_user_password(email, password) == password:
-            flash("You are logged in.")
-            session["current_user"] = user.user_id
-        else:
-            flash("Those passwords don't match.")
-    
-    return redirect("/", user=user)
+        # Log in user by storing the user's email in session
+        session["user_email"] = user.email
+        flash(f"Welcome back, {user.email}!")
+
+    return redirect("/")
 
 @app.route('/user-logout')
 def logout():
