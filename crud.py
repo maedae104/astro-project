@@ -20,10 +20,26 @@ converted_date = swe.julday(year, month, day)
 sun_calcs = swe.calc_ut(converted_date, 0)
 moon_calcs = swe.calc_ut(converted_date, 1)
 merc_calcs = swe.calc_ut(converted_date, 2)
+venus_calcs = swe.calc_ut(converted_date, 3)
+mars_calcs = swe.calc_ut(converted_date, 4)
+jup_calcs = swe.calc_ut(converted_date, 5)
+sat_calcs = swe.calc_ut(converted_date, 6)
+uran_calcs = swe.calc_ut(converted_date, 7)
+nept_calcs = swe.calc_ut(converted_date, 8)
+pluto_calcs = swe.calc_ut(converted_date, 9)
+
 
 sun_ecl_long = sun_calcs[0][0]
 moon_ecl_long = moon_calcs[0][0]
 merc_ecl_long = merc_calcs[0][0]
+venus_ecl_long = venus_calcs[0][0]
+mars_ecl_long = mars_calcs[0][0]
+jup_ecl_long = jup_calcs[0][0]
+sat_ecl_long = sat_calcs[0][0]
+uran_ecl_long =uran_calcs[0][0]
+nept_ecl_long = nept_calcs[0][0]
+pluto_ecl_long = pluto_calcs[0][0]
+
 
 def calculate_sign(ecl_long):
     sign_degrees = ecl_long
@@ -69,10 +85,10 @@ def get_moon_phase(current_date):
     if current_date in xmoon_dict.keys():
         return xmoon_dict[current_date][0]
 
-def create_user(email, password):
+def create_user(email, password, phone_number):
     """Create and return a new user."""
 
-    user = User(email=email, password=password)
+    user = User(email=email, password=password, phone_number=phone_number)
 
     return user
 
@@ -84,6 +100,9 @@ def get_user_password(email, password):
 
     user = User.query.filter(User.email == email).first()   
     return user.password
+
+def send_text_update():
+    '''send an update to user of todays transit via text'''
 
 if __name__ == '__main__':
     from server import app

@@ -22,7 +22,7 @@ class User(db.Model):
     user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     email = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(25), nullable=False)
-    phone_number = db.Column(db.String(12), nullable=True)
+    phone_number = db.Column(db.String(12), nullable=False)
 
     # text_update = db.relationship("TextUpdates", back_populates="user")
 
@@ -35,10 +35,18 @@ class Transit(db.Model):
     __tablename__ = "transits"
 
     transit_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    date = db.Column(db.DateTime)
+    date = db.Column(db.String)
     sun_sign = db.Column(db.String)
     moon_sign = db.Column(db.String)
     moon_phase = db.Column(db.String)
+    merc_sign = db.Column(db.String)
+    venus_sign = db.Column(db.String)
+    mars_sign = db.Column(db.String)
+    jup_sign = db.Column(db.String)
+    sat_sign = db.Column(db.String)
+    uran_sign = db.Column(db.String)
+    nept_sign = db.Column(db.String)
+    pluto_sign = db.Column(db.String)
     
 
     # text_update = db.relationship("Transit", back_populates="transit")

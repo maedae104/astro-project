@@ -24,14 +24,55 @@ def index():
 
 @app.route('/transits')
 def get_transits():
-    sun_long= crud.sun_ecl_long
-    sun_sign = crud.calculate_sign(sun_long)
-    moon_long = crud.moon_ecl_long
-    moon_sign = crud.calculate_sign(moon_long)
+
     current_date = crud.current_date
     moon_phase = crud.get_moon_phase(current_date)
+    
+    
+    sun_long= crud.sun_ecl_long
+    sun_sign = crud.calculate_sign(sun_long)
 
-    return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign, moon_long=moon_long, moon_sign=moon_sign, current_date=current_date,  moon_phase=moon_phase)
+    moon_long = crud.moon_ecl_long
+    moon_sign = crud.calculate_sign(moon_long)
+
+    merc_long = crud.merc_ecl_long
+    merc_sign = crud.calculate_sign(merc_long)
+
+    venus_long = crud.venus_ecl_long
+    venus_sign = crud.calculate_sign(venus_long)
+
+    mars_long = crud.mars_ecl_long
+    mars_sign = crud.calculate_sign(mars_long)
+
+    jup_long = crud.jup_ecl_long
+    jup_sign = crud.calculate_sign(jup_long)
+
+    sat_long = crud.sat_ecl_long
+    sat_sign = crud.calculate_sign(sat_long)
+
+    uran_long = crud.uran_ecl_long
+    uran_sign = crud.calculate_sign(uran_long)
+
+    nept_long = crud.nept_ecl_long
+    nept_sign = crud.calculate_sign(nept_long)
+
+    pluto_long = crud.pluto_ecl_long
+    pluto_sign = crud.calculate_sign(pluto_long)
+
+    transit = Transit(date=current_date, sun_sign = sun_sign, moon_sign = moon_sign, moon_phase=moon_phase, merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
+                             jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
+                             pluto_sign = pluto_sign)
+    db.session.add(transit)
+    db.session.commit()
+
+    return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign,
+                             moon_long=moon_long, moon_sign=moon_sign, current_date=current_date, 
+                             moon_phase=moon_phase, merc_long=merc_long, venus_long=venus_long,
+                             mars_long = mars_long, jup_long=jup_long, sat_long=sat_long, 
+                             uran_long = uran_long, nept_long = nept_long, pluto_long=pluto_long,
+                             merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
+                             jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
+                             pluto_sign = pluto_sign, transit = transit)
 
 @app.route("/users", methods=["POST"])
 def create_user():
@@ -39,7 +80,7 @@ def create_user():
     email = request.form.get("email")
     password = request.form.get("password")
     phone_number = request.form.get("phone_number")
-    output = crud.check_user_email(email)
+    output = crud.get_user_by_email(email)
     new_user = User(email=email, password=password, phone_number=phone_number)
 
     if output != None:
@@ -54,23 +95,6 @@ def create_user():
 @app.route("/login", methods=["POST"])
 def user_login():
 
-    # email = request.form.get("email")
-    # password = request.form.get("password")
-    
-    # user = crud.check_user_email(email)
-
-
-    # if user == None:
-    #     flash("Please create an account.")
-    # else:
-    #     if crud.get_user_password(email, password) == password:
-    #         flash("You are logged in.")
-    #         session["current_user"] = user.user_id
-    #     else:
-    #         flash("Those passwords don't match.")
-    
-    # return redirect("/")
-
     email = request.form.get("email")
     password = request.form.get("password")
 
@@ -78,7 +102,6 @@ def user_login():
     if not user or user.password != password:
         flash("The email or password you entered was incorrect.")
     else:
-        # Log in user by storing the user's email in session
         session["user_email"] = user.email
         flash(f"Welcome back, {user.email}!")
 
@@ -91,4 +114,6 @@ def logout():
 
 
 if __name__ == "__main__":
+    connect_to_db(app)
     app.run(host="0.0.0.0", debug=True)
+    
