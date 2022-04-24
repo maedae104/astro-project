@@ -13,9 +13,6 @@ app = Flask(__name__   )
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-'''This is the server'''
-
-
 @app.route('/')
 def index():
 
@@ -97,21 +94,26 @@ def user_login():
 
     email = request.form.get("email")
     password = request.form.get("password")
+    phone_number = request.form.get("phone_number")
 
     user = crud.get_user_by_email(email)
+    session['phone_number'] = user.phone_number
+
     if not user or user.password != password:
         flash("The email or password you entered was incorrect.")
     else:
         session["user_email"] = user.email
         flash(f"Welcome back, {user.email}!")
 
-    return redirect("/")
+    return render_template('userProfile.html')
 
 @app.route('/user-logout')
 def logout():
+    ''' Logout user '''
+    
+    session.pop("user_email", None)
 
-    return render_template("hompage.html")
-
+    return redirect("/")
 
 if __name__ == "__main__":
     connect_to_db(app)
