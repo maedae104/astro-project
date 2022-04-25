@@ -101,8 +101,6 @@ def get_user_password(email, password):
     user = User.query.filter(User.email == email).first()   
     return user.password
 
-def send_text_update():
-    '''send an update to user of todays transit via text'''
 
 if __name__ == '__main__':
     from server import app

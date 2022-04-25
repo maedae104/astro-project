@@ -4,9 +4,10 @@ import crud
 import web_scrape
 from model import connect_to_db, db, User, Transit, TextUpdates
 from datetime import date
-
 from jinja2 import StrictUndefined
-
+import os
+from twilio.rest import Client
+from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__   )
@@ -76,7 +77,7 @@ def create_user():
 
     email = request.form.get("email")
     password = request.form.get("password")
-    phone_number = request.form.get("phone_number")
+    phone_number = request.form.get("phone")
     output = crud.get_user_by_email(email)
     new_user = User(email=email, password=password, phone_number=phone_number)
 
@@ -106,6 +107,30 @@ def user_login():
         flash(f"Welcome back, {user.email}!")
 
     return render_template('userProfile.html')
+
+@app.route("/user-profile")
+def send_user_updates():
+
+    transit_update = Transit.query.filter_by(date = crud.current_date)
+    email = request.form.get("email")
+    user = crud.get_user_by_email(email)
+    session['phone_number'] = user.phone_number
+    
+
+    account_sid = "AC991a3de185a36e54239a02cf95ce35de"
+    auth_token  = os.environ['TWILIO_TOKEN']
+
+    client = Client(account_sid, auth_token)
+
+
+    message = client.messages.create(
+    body= transit_update,
+    from_='+19893680543',
+    to= user.phone_number
+    )
+
+
+    return render_template('userProfile.html')  
 
 @app.route('/user-logout')
 def logout():
