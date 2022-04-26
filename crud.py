@@ -85,6 +85,24 @@ def get_moon_phase(current_date):
     if current_date in xmoon_dict.keys():
         return xmoon_dict[current_date][0]
 
+def get_solar_eclipse():
+    """pull eclipse info from swe"""
+
+    sol_ecl_data = swe.sol_eclipse_when_glob(converted_date)
+
+    sol_ecl_time = swe.revjul(sol_ecl_data[1][0])
+
+    
+
+    return(sol_ecl_time)
+
+def get_aspects():
+    """get current aspects in the sky"""
+
+def get_retrogrades():
+    """get current retrogrades in the sky"""
+
+
 def create_user(email, password, phone_number):
     """Create and return a new user."""
 
@@ -100,6 +118,7 @@ def get_user_password(email, password):
 
     user = User.query.filter(User.email == email).first()   
     return user.password
+
 
 
 if __name__ == '__main__':

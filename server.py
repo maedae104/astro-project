@@ -57,6 +57,14 @@ def get_transits():
     pluto_long = crud.pluto_ecl_long
     pluto_sign = crud.calculate_sign(pluto_long)
 
+    solar_ecl = crud.get_solar_eclipse()
+
+    day = solar_ecl[2]
+    month = solar_ecl[1]
+    year = solar_ecl[0]
+    
+
+
     transit = Transit(date=current_date, sun_sign = sun_sign, moon_sign = moon_sign, moon_phase=moon_phase, merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
                              pluto_sign = pluto_sign)
@@ -70,7 +78,8 @@ def get_transits():
                              uran_long = uran_long, nept_long = nept_long, pluto_long=pluto_long,
                              merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
-                             pluto_sign = pluto_sign, transit = transit)
+                             pluto_sign = pluto_sign, transit = transit, solar_ecl=solar_ecl, day=day, year=year, month=month)
+
 
 @app.route("/users", methods=["POST"])
 def create_user():
