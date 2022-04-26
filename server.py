@@ -114,7 +114,7 @@ def send_user_updates():
     transit_update = Transit.query.filter_by(date = crud.current_date)
     email = request.form.get("email")
     user = crud.get_user_by_email(email)
-    session['phone_number'] = user.phone_number
+    
     
 
     account_sid = "AC991a3de185a36e54239a02cf95ce35de"
@@ -126,9 +126,9 @@ def send_user_updates():
     message = client.messages.create(
     body= transit_update,
     from_='+19893680543',
-    to= user.phone_number
+    to= session['phone_number']
     )
-
+    print(message)
 
     return render_template('userProfile.html')  
 

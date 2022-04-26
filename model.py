@@ -13,7 +13,6 @@ def connect_to_db(flask_app, db_uri="postgresql:///transits", echo=True):
     print("Connected to the db!")
 
 
-
 class User(db.Model):
     """A user."""
 
@@ -23,8 +22,9 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(25), nullable=False)
     phone_number = db.Column(db.String(12), nullable=False)
+    # text_update_id = db.Column(db.String(5), db.ForeignKey('updates.update_id'))
 
-    # text_update = db.relationship("TextUpdates", back_populates="user")
+    text_update = db.relationship("TextUpdates", back_populates="user")
 
 
     def __repr__(self):
@@ -47,21 +47,27 @@ class Transit(db.Model):
     uran_sign = db.Column(db.String)
     nept_sign = db.Column(db.String)
     pluto_sign = db.Column(db.String)
+    # text_update_id = db.Column(db.Integer, db.ForeignKey('updates.update_id'))
     
 
-    # text_update = db.relationship("Transit", back_populates="transit")
+    text_update = db.relationship("Transit", back_populates="transit")
 
     def __repr__(self):
-            return f'<Transit: transit_id={self.transit_id}, Date={self.date}, sun_sign={self.sun_sign}, moon_phase={self.moon_phase} moon_sign={self.moon_sign}>'
+            return f"""Today's Transits: the sun is in: {self.sun_sign},  
+            the moon phase is: {self.moon_phase} the moon is in:{self.moon_sign}, 
+            mercury is in: {self.merc_sign}, venus is in: {self.venus_sign}"""
+
 class TextUpdates(db.Model):
+
+    __tablename__ = "updates"
 
     update_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     transit_date = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-
-    # transit = db.relationship("Transit", back_populates="text_update")
-    # user = db.relationship("User", back_populates="text_update")
-
+    transit_id = db.Column(db.Integer, db.ForeignKey('transits.transit_id'))
+   
+    user = db.relationship("User", back_populates="text_update")
+    transit = db.relationship("Transit", back_populates="text_update")
 
 
 if __name__ == "__main__":
