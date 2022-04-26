@@ -18,7 +18,7 @@ model.db.create_all()
 for n in range(10):
     email = f'user{n}@test.com' 
     password = 'test'
-    phone_number = 707-484-9110
+    phone_number = 555555555
 
     user = crud.create_user(email, password, phone_number)
     model.db.session.add(user)

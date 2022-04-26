@@ -22,7 +22,7 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False, unique=True)
     password = db.Column(db.String(25), nullable=False)
     phone_number = db.Column(db.String(12), nullable=False)
-    # text_update_id = db.Column(db.String(5), db.ForeignKey('updates.update_id'))
+    
 
     text_update = db.relationship("TextUpdates", back_populates="user")
 
@@ -47,10 +47,10 @@ class Transit(db.Model):
     uran_sign = db.Column(db.String)
     nept_sign = db.Column(db.String)
     pluto_sign = db.Column(db.String)
-    # text_update_id = db.Column(db.Integer, db.ForeignKey('updates.update_id'))
+   
     
 
-    text_update = db.relationship("Transit", back_populates="transit")
+    text_update = db.relationship("TextUpdates", back_populates="transit")
 
     def __repr__(self):
             return f"""Today's Transits: the sun is in: {self.sun_sign},  
