@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Current Transits{% endblock %}
+
+{% block body %}
+
+<h1>Welcome back {{ session["user_email"] }}</h1>
+<a href="/user-logout">Logout</a>
+
+
+<h2> Your profile details</h2>
+<h3>Email: {{ session["user_email"] }}</h3>
+<h3>Phone number: {{ session['phone_number'] }}</h3>
+
+
+<button type="button">Send me a text update!</button>
+
+
+<h3>
+    <a href="/transits">Take me to the today's transits</a>
+</h3>
+
+
+<script src="/static/eventlisteners.js"></script>
+
+{% endblock %}
