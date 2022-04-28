@@ -26,7 +26,6 @@ def get_transits():
     current_date = crud.current_date
     moon_phase = crud.get_moon_phase(current_date)
     
-    
     sun_long= crud.sun_ecl_long
     sun_sign = crud.calculate_sign(sun_long)
 
@@ -59,17 +58,44 @@ def get_transits():
 
     solar_ecl = crud.get_solar_eclipse()
 
-    day = solar_ecl[2]
-    month = solar_ecl[1]
-    year = solar_ecl[0]
+    sun_day = solar_ecl[2]
+    sun_month = solar_ecl[1]
+    sun_year = solar_ecl[0]
+
+    lunar_ecl = crud.get_lunar_eclipse()
+
+    moon_day = lunar_ecl[2]
+    moon_month = lunar_ecl[1]
+    moon_year = lunar_ecl[0]
+    
+    transit_list = [sun_sign, moon_sign, merc_sign, venus_sign, mars_sign, jup_sign, sat_sign, uran_sign, nept_sign, pluto_sign]
+    trans_dict = {
+        sun_sign : " the Sun",
+        moon_sign : "the Moon", 
+        merc_sign : "Mercury",
+        venus_sign : "Venus",
+        mars_sign : "Mars",
+        jup_sign : "Jupiter",
+        sat_sign : "Saturn",
+        nept_sign : "Neptune", 
+        pluto_sign : "Pluto" }
     
 
+    
+    for trans in transit_list:
+        sun_aspect = crud.get_aspects(transit_list[0], trans)
+        sun_as_str = f"The sun is { sun_aspect } to { trans_dict[trans] } in { trans }"
+        print(sun_as_str)
+
+        
 
     transit = Transit(date=current_date, sun_sign = sun_sign, moon_sign = moon_sign, moon_phase=moon_phase, merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
                              pluto_sign = pluto_sign)
     db.session.add(transit)
     db.session.commit()
+    
+    
 
     return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign,
                              moon_long=moon_long, moon_sign=moon_sign, current_date=current_date, 
@@ -78,7 +104,10 @@ def get_transits():
                              uran_long = uran_long, nept_long = nept_long, pluto_long=pluto_long,
                              merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
-                             pluto_sign = pluto_sign, transit = transit, solar_ecl=solar_ecl, day=day, year=year, month=month)
+                             pluto_sign = pluto_sign, transit = transit, solar_ecl=solar_ecl, sun_day=sun_day,
+                             sun_year=sun_year, sun_month=sun_month, lunar_ecl=lunar_ecl, moon_day = moon_day,
+                             moon_month=moon_month, moon_year=moon_year, transit_list= transit_list, 
+                             )
 
 
 @app.route("/users", methods=["POST"])

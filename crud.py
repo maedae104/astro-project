@@ -80,6 +80,43 @@ def calculate_sign(ecl_long):
     elif sign_degrees > 330 and sign_degrees < 360:
         return "Pisces"
 
+def get_aspects(planet_a, planet_b):
+    """get current aspects in the sky"""
+
+    sign_dict= {
+        "Aries": 1,
+        "Taurus": 2,
+        "Gemini": 3,
+        "Cancer": 4,
+        "Leo": 5,
+        "Virgo": 6,
+        "Libra": 7,
+        "Scorpio": 8,
+        "Sagittarius": 9,
+        "Capricorn": 10,
+        "Aquarius": 11,
+        "Pisces": 12
+    }
+    # planet_a = calculate_sign(planet_a)
+    # planet_b = calculate_sign(planet_b)
+
+    if sign_dict[planet_b] == sign_dict[planet_a]:
+        return "conjunct"
+
+    elif sign_dict[planet_b] == sign_dict[planet_a] + 2 or sign_dict[planet_b] == sign_dict[planet_a] + 10:
+        return "sextile"
+
+    elif sign_dict[planet_b] == sign_dict[planet_a] + 3 or sign_dict[planet_b] == sign_dict[planet_a] + 9:
+        return "square"
+    
+    elif sign_dict[planet_b] == sign_dict[planet_a] + 4 or sign_dict[planet_b] == sign_dict[planet_a] + 8:
+        return "trine"
+
+    elif sign_dict[planet_b] == sign_dict[planet_a] + 6:
+        return "opposition"
+
+
+
 def get_moon_phase(current_date):
     xmoon_dict = web_scrape.moon_dict
     if current_date in xmoon_dict.keys():
@@ -92,12 +129,17 @@ def get_solar_eclipse():
 
     sol_ecl_time = swe.revjul(sol_ecl_data[1][0])
 
-    
-
     return(sol_ecl_time)
 
-def get_aspects():
-    """get current aspects in the sky"""
+def get_lunar_eclipse():
+    """pull eclipse info from swe"""
+
+    lun_ecl_data = swe.lun_eclipse_when(converted_date)
+
+    lun_ecl_time = swe.revjul(lun_ecl_data[1][0])
+
+    return(lun_ecl_time)
+
 
 def get_retrogrades():
     """get current retrogrades in the sky"""
