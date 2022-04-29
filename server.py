@@ -24,6 +24,7 @@ def index():
 def get_transits():
 
     current_date = crud.current_date
+    today = crud.today
     moon_phase = crud.get_moon_phase(current_date)
     
     sun_long= crud.sun_ecl_long
@@ -68,26 +69,8 @@ def get_transits():
     moon_month = lunar_ecl[1]
     moon_year = lunar_ecl[0]
     
-    transit_list = [sun_sign, moon_sign, merc_sign, venus_sign, mars_sign, jup_sign, sat_sign, uran_sign, nept_sign, pluto_sign]
-    trans_dict = {
-        sun_sign : " the Sun",
-        moon_sign : "the Moon", 
-        merc_sign : "Mercury",
-        venus_sign : "Venus",
-        mars_sign : "Mars",
-        jup_sign : "Jupiter",
-        sat_sign : "Saturn",
-        nept_sign : "Neptune", 
-        pluto_sign : "Pluto" }
     
 
-    
-    for trans in transit_list:
-        sun_aspect = crud.get_aspects(transit_list[0], trans)
-        sun_as_str = f"The sun is { sun_aspect } to { trans_dict[trans] } in { trans }"
-        print(sun_as_str)
-
-        
 
     transit = Transit(date=current_date, sun_sign = sun_sign, moon_sign = moon_sign, moon_phase=moon_phase, merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
@@ -106,8 +89,7 @@ def get_transits():
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
                              pluto_sign = pluto_sign, transit = transit, solar_ecl=solar_ecl, sun_day=sun_day,
                              sun_year=sun_year, sun_month=sun_month, lunar_ecl=lunar_ecl, moon_day = moon_day,
-                             moon_month=moon_month, moon_year=moon_year, transit_list= transit_list, 
-                             )
+                             moon_month=moon_month, moon_year=moon_year, today=today)
 
 
 @app.route("/users", methods=["POST"])
@@ -149,24 +131,24 @@ def user_login():
 @app.route("/user-profile")
 def send_user_updates():
 
-    transit_update = Transit.query.filter_by(date = crud.current_date)
-    email = request.form.get("email")
-    user = crud.get_user_by_email(email)
+    # transit_update = Transit.query.filter_by(date = crud.current_date)
+    # email = request.form.get("email")
+    # user = crud.get_user_by_email(email)
     
     
 
-    account_sid = "AC991a3de185a36e54239a02cf95ce35de"
-    auth_token  = os.environ['TWILIO_TOKEN']
+    # account_sid = "AC991a3de185a36e54239a02cf95ce35de"
+    # auth_token  = os.environ['TWILIO_TOKEN']
 
-    client = Client(account_sid, auth_token)
+    # client = Client(account_sid, auth_token)
 
 
-    message = client.messages.create(
-    body= transit_update,
-    from_='+19893680543',
-    to= session['phone_number']
-    )
-    print(message)
+    # message = client.messages.create(
+    # body= transit_update,
+    # from_='+19893680543',
+    # to= session['phone_number']
+    # )
+    # print(message)
 
     return render_template('userProfile.html')  
 

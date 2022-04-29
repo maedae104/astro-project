@@ -3,30 +3,64 @@
 
 {% block body %}
 
-<h2>Today's Date is : {{ current_date }} </h2>
+<h3>Today's Date is : {{ today }} </h3>
+<div class="sun-div">The Sun
+    <ul>
+        The sun is in: {{ sun_sign }} 
+    </ul>
+</div>
+<div class="moon-div">The Moon
+    <ul>
+        The moon is in: {{ moon_sign }}
+    </ul>
+    <ul>
+        The moon phase is in: {{ moon_phase }} 
+    </ul>
+</div>
+    <div class="inner-planet-div">Personal Planets
+    <ul>
+        Mercury is in: {{ merc_sign }}    
+    </ul>
+    <ul>
+        Venus is in: {{ venus_sign }}   
+    </ul>
+    <ul>
+        Mars is in: {{ mars_sign }} 
+    </ul>
+    <ul>
+        Jupiter is in: {{ jup_sign }}   
+    </ul>
+    <ul>
+        Saturn is in: {{ sat_sign }}   
+    </ul>
+</div>
 
-<h3>The sun is in: {{ sun_sign }}  </h3>
-<h3>The moon is in: {{ moon_sign }} </h3>
-<h3>The moon phase is in: {{ moon_phase }} </h3>
-<h3>Mercury is in: {{ merc_sign }}  </h3>
-<h3>Venus is in: {{ venus_sign }} </h3>
-<h3>Mars is in: {{ mars_sign }} </h3>
-<h3>Jupiter is in: {{ jup_sign }}  </h3>
-<h3>Saturn is in: {{ sat_sign }} </h3>
-<h3>Uranus is in: {{ uran_sign }} </h3>
-<h3>Pluto is in: {{ pluto_sign }} </h3>
+<div class="outer-planet-div">Generational Planets
+    <ul>
+        Neptune is in: {{ nept_sign }}
+    </ul>
+    <ul>
+        Uranus is in: {{ uran_sign }}
+    </ul>
+    <ul>
+        Pluto is in: {{ pluto_sign }}    </ul>
+</div>
 
-<h3> The next Solar Eclipse happens on: {{ sun_month }} {{ sun_day }} {{ sun_year }} </h3>
+<div class="eclipse-div">Upcoming Eclipses
+    <ul>
+        The next Solar Eclipse happens on: {{ sun_month }} {{ sun_day }} {{ sun_year }}
+    </ul>
+    <ul>
+        The next Lunar Eclipse happens on: {{ moon_month }} {{ moon_day }} {{ moon_year }}
+    </ul>
+</div>
 
-<h3> The next Lunar Eclipse happens on: {{ moon_month }} {{ moon_day }} {{ moon_year }} </h3>
+<div class="trine-div">Conjunctions</div>
+
+<div class="trine-div">Sextiles</div>
+<div class="trine-div">Squares</div>
+<div class="trine-div">Trines</div>
 
 
-
-<h3>
-    <a href="/">Take me to the homepage</a>
-</h3>
-<h3>
-    <a href="/login">Take me my profile</a>
-</h3>
 
 {% endblock %}
