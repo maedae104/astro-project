@@ -2,10 +2,13 @@ import requests, json
 from bs4 import BeautifulSoup
 from flask import jsonify
 
-URL = "https://mooncalendar.astro-seek.com/"
+URL = "https://mooncalendar.astro-seek.com/moon-phases-calendar-may-2022"
 page = requests.get(URL)
 
+retro_URL = "https://horoscopes.astro-seek.com/retrograde-planets-astrology-calendar-2022"
+retro_page = requests.get(retro_URL)
 
+retro_soup = BeautifulSoup(retro_page.content, "html.parser")
 soup = BeautifulSoup(page.content, "html.parser")
 
 table = soup.find(id="tabs_content_container")
@@ -13,6 +16,7 @@ rows = table.find_all("tr", class_="ruka")
 moon_dict = { }
 
 
+retro_table = retro_soup.find()
 
 for row in rows:
     moon_dt = row.text.strip('\n')

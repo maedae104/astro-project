@@ -78,7 +78,46 @@ def get_transits():
     db.session.add(transit)
     db.session.commit()
     
+    transit_list = [sun_sign, moon_sign, merc_sign, venus_sign, mars_sign, jup_sign, sat_sign, uran_sign, nept_sign, pluto_sign]
+    trans_dict = {
+        sun_sign : " the Sun",
+        moon_sign : "the Moon", 
+        merc_sign : "Mercury",
+        venus_sign : "Venus",
+        mars_sign : "Mars",
+        jup_sign : "Jupiter",
+        sat_sign : "Saturn",
+        nept_sign : "Neptune", 
+        pluto_sign : "Pluto" }
     
+    conjunctions = []
+    squares = []
+
+    def get_sun_aspects():
+            for trans in transit_list:
+                sun_aspect = crud.get_aspects(trans, transit_list[0])
+                # sun_as_str = f"The sun is { sun_aspect } to { trans_dict[trans] } in { trans }"
+                if sun_aspect == None:
+                    print("No sun aspects") 
+                elif sun_aspect == "conjunct":
+                    conjunctions.append(f"The sun is conjunct { trans_dict[trans] } in { trans }")
+                    print(conjunctions)
+                elif sun_aspect == "square": 
+                    squares.append(f" The sun is square { trans_dict[trans] } in { trans }")
+                    
+                
+                    
+
+    def get_moon_aspects():
+        for trans in transit_list:
+            moon_aspect = crud.get_aspects(transit_list[1], trans)
+            moon_as_str = f"The moon is { moon_aspect } to { trans_dict[trans] } in { trans }"
+            if moon_aspect != None:
+                print(moon_as_str)
+
+
+    get_sun_aspects()
+    get_moon_aspects()
 
     return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign,
                              moon_long=moon_long, moon_sign=moon_sign, current_date=current_date, 
@@ -90,6 +129,12 @@ def get_transits():
                              pluto_sign = pluto_sign, transit = transit, solar_ecl=solar_ecl, sun_day=sun_day,
                              sun_year=sun_year, sun_month=sun_month, lunar_ecl=lunar_ecl, moon_day = moon_day,
                              moon_month=moon_month, moon_year=moon_year, today=today)
+
+@app.route("/create-user")
+def display_create_user():
+
+    return render_template("createuser.html")
+
 
 
 @app.route("/users", methods=["POST"])
@@ -109,6 +154,11 @@ def create_user():
         db.session.commit()
 
     return redirect("/")
+
+@app.route("/login")
+def display_login():
+
+    return render_template("userlogin.html")
 
 @app.route("/login", methods=["POST"])
 def user_login():
@@ -131,24 +181,25 @@ def user_login():
 @app.route("/user-profile")
 def send_user_updates():
 
-    # transit_update = Transit.query.filter_by(date = crud.current_date)
-    # email = request.form.get("email")
-    # user = crud.get_user_by_email(email)
+    transit_update = Transit.query.filter_by(date = crud.current_date)
+    email = request.form.get("email")
+    user = crud.get_user_by_email(email)
     
-    
+    account_sid = "AC991a3de185a36e54239a02cf95ce35de"
+    auth_token  = os.environ['TWILIO_TOKEN']
 
-    # account_sid = "AC991a3de185a36e54239a02cf95ce35de"
-    # auth_token  = os.environ['TWILIO_TOKEN']
+    client = Client(account_sid, auth_token)
 
-    # client = Client(account_sid, auth_token)
+    message = client.messages.create(
+    body= transit_update,
+    from_='+19893680543',
+    to= session['phone_number']
+    )
+    print(message)
 
-
-    # message = client.messages.create(
-    # body= transit_update,
-    # from_='+19893680543',
-    # to= session['phone_number']
-    # )
-    # print(message)
+    text_update = TextUpdates(transit_date = date, user_id = user.user_id)
+    db.session.add(text_update)
+    db.session.commit()
 
     return render_template('userProfile.html')  
 

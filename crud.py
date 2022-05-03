@@ -13,7 +13,7 @@ c_today = c_today.split(' ')
 year = int(c_today[0])
 month = int(c_today[1])
 day = int(c_today[2])
-current_date = today.strftime("%b%d")
+current_date = today.strftime("%b%-d")
 converted_date = swe.julday(year, month, day)
 
 
@@ -113,39 +113,7 @@ def get_aspects(planet_a, planet_b):
 
     elif sign_dict[planet_b] == sign_dict[planet_a] + 6:
         return "opposition"
-
-# transit_list = [sun_sign, moon_sign, merc_sign, venus_sign, mars_sign, jup_sign, sat_sign, uran_sign, nept_sign, pluto_sign]
-#     trans_dict = {
-#         sun_sign : " the Sun",
-#         moon_sign : "the Moon", 
-#         merc_sign : "Mercury",
-#         venus_sign : "Venus",
-#         mars_sign : "Mars",
-#         jup_sign : "Jupiter",
-#         sat_sign : "Saturn",
-#         nept_sign : "Neptune", 
-#         pluto_sign : "Pluto" }
-    
-
-#     def get_sun_aspects():
-#         for trans in transit_list:
-#             sun_aspect = crud.get_aspects(transit_list[0], trans)
-#             sun_as_str = f"The sun is { sun_aspect } to { trans_dict[trans] } in { trans }"
-#             if sun_aspect != None:
-#                 print(sun_as_str)
-
-#     def get_moon_aspects():
-#         for trans in transit_list:
-#             moon_str_list = []
-#             moon_aspect = crud.get_aspects(transit_list[1], trans)
-#             moon_as_str = f"The moon is { moon_aspect } to { trans_dict[trans] } in { trans }"
-#             if moon_aspect == True:
-#                 moon_str_list.append(moon_as_str)
-#                 return moon_str_list
             
-
-#     moon_asp = get_moon_aspects()
-#     sun_asp = get_sun_aspects()
 
 def get_moon_phase(current_date):
     xmoon_dict = web_scrape.moon_dict
