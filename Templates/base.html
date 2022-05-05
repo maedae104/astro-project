@@ -17,7 +17,7 @@
     </title>
     
     {% block head %}
-  
+    
     {% endblock %}
     
   </head>
@@ -33,9 +33,10 @@
           <li><a href="/transits">Today's Transits</a></li>
           <li><a href="/login">Login</a></li>
           <li><a href="/create-user">Register</a></li>
+          <li><a href="/user-profile">User Profile</a></li>
           </ul>
     </nav>
-
+    
     {% for msg in get_flashed_messages() %}
     <p class="flash-msg">
       {{ msg }}

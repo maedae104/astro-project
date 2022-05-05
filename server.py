@@ -178,7 +178,7 @@ def user_login():
 
     return render_template('userProfile.html')
 
-@app.route("/user-profile")
+@app.route("/updates")
 def send_user_updates():
 
     transit_update = Transit.query.filter_by(date = crud.current_date)
@@ -202,6 +202,11 @@ def send_user_updates():
     db.session.commit()
 
     return render_template('userProfile.html')  
+
+@app.route('/user-profile')
+def display_profile():
+   
+    return render_template('userProfile.html')
 
 @app.route('/user-logout')
 def logout():
