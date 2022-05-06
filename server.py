@@ -69,7 +69,8 @@ def get_transits():
     moon_month = lunar_ecl[1]
     moon_year = lunar_ecl[0]
     
-    
+    sun_aspects = crud.get_sun_aspects()
+    moon_aspects = crud.get_moon_aspects()
 
 
     transit = Transit(date=current_date, sun_sign = sun_sign, moon_sign = moon_sign, moon_phase=moon_phase, merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
@@ -78,46 +79,7 @@ def get_transits():
     db.session.add(transit)
     db.session.commit()
     
-    transit_list = [sun_sign, moon_sign, merc_sign, venus_sign, mars_sign, jup_sign, sat_sign, uran_sign, nept_sign, pluto_sign]
-    trans_dict = {
-        sun_sign : " the Sun",
-        moon_sign : "the Moon", 
-        merc_sign : "Mercury",
-        venus_sign : "Venus",
-        mars_sign : "Mars",
-        jup_sign : "Jupiter",
-        sat_sign : "Saturn",
-        nept_sign : "Neptune", 
-        pluto_sign : "Pluto" }
     
-    conjunctions = []
-    squares = []
-
-    def get_sun_aspects():
-            for trans in transit_list:
-                sun_aspect = crud.get_aspects(trans, transit_list[0])
-                # sun_as_str = f"The sun is { sun_aspect } to { trans_dict[trans] } in { trans }"
-                if sun_aspect == None:
-                    print("No sun aspects") 
-                elif sun_aspect == "conjunct":
-                    conjunctions.append(f"The sun is conjunct { trans_dict[trans] } in { trans }")
-                    print(conjunctions)
-                elif sun_aspect == "square": 
-                    squares.append(f" The sun is square { trans_dict[trans] } in { trans }")
-                    
-                
-                    
-
-    def get_moon_aspects():
-        for trans in transit_list:
-            moon_aspect = crud.get_aspects(transit_list[1], trans)
-            moon_as_str = f"The moon is { moon_aspect } to { trans_dict[trans] } in { trans }"
-            if moon_aspect != None:
-                print(moon_as_str)
-
-
-    get_sun_aspects()
-    get_moon_aspects()
 
     return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign,
                              moon_long=moon_long, moon_sign=moon_sign, current_date=current_date, 
@@ -128,7 +90,7 @@ def get_transits():
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
                              pluto_sign = pluto_sign, transit = transit, solar_ecl=solar_ecl, sun_day=sun_day,
                              sun_year=sun_year, sun_month=sun_month, lunar_ecl=lunar_ecl, moon_day = moon_day,
-                             moon_month=moon_month, moon_year=moon_year, today=today)
+                             moon_month=moon_month, moon_year=moon_year, today=today, sun_aspects= sun_aspects, moon_aspects= moon_aspects )
 
 @app.route("/create-user")
 def display_create_user():

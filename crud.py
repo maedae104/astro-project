@@ -114,6 +114,96 @@ def get_aspects(planet_a, planet_b):
     elif sign_dict[planet_b] == sign_dict[planet_a] + 6:
         return "opposition"
             
+sun_sign = calculate_sign(sun_ecl_long)
+moon_sign = calculate_sign(moon_ecl_long)
+merc_sign = calculate_sign(merc_ecl_long)
+venus_sign = calculate_sign(venus_ecl_long)
+mars_sign = calculate_sign(mars_ecl_long)
+jup_sign = calculate_sign(jup_ecl_long)
+sat_sign = calculate_sign(sat_ecl_long)
+uran_sign = calculate_sign(uran_ecl_long)
+nept_sign = calculate_sign(nept_ecl_long)
+pluto_sign = calculate_sign(pluto_ecl_long)
+
+transit_list = [sun_sign, moon_sign, merc_sign, venus_sign, mars_sign, jup_sign, sat_sign, uran_sign, nept_sign, pluto_sign]
+# trans_dict = {
+#         sun_sign : "the Sun" ,
+#         moon_sign : "the Moon", 
+#         merc_sign : "Mercury",
+#         venus_sign : "Venus",
+#         mars_sign : "Mars",
+#         jup_sign : "Jupiter",
+#         sat_sign : "Saturn",
+#         nept_sign : "Neptune", 
+#         pluto_sign : "Pluto" }
+
+trans_dict = {
+        "the Sun" : sun_sign ,
+        "the Moon" : moon_sign , 
+        "Mercury" : merc_sign ,
+        "Venus" : venus_sign  ,
+        "Mars" : mars_sign  ,
+        "Jupiter" : jup_sign ,
+        "Saturn" : sat_sign ,
+        "Neptune" : nept_sign , 
+        "Pluto" : pluto_sign }
+    
+conjunctions = []
+squares = []
+oppositions = []
+sextiles = []
+trines = []
+
+def get_sun_aspects():
+            # sun_conjunctions = []
+            # sun_squares = []
+            # sun_oppositions = []
+            # sun_sextiles = []
+            # sun_trines = []
+
+    # for trans in transit_list:
+            # sun_aspect = get_aspects(trans, transit_list[0])
+
+    planets = trans_dict.keys()
+    for planet in planets:
+        print(planet)
+        sun_aspect = get_aspects(trans_dict[planet], transit_list[0])
+        
+        
+        if sun_aspect == None:
+            return f"The sun has no aspects to {planet}"
+
+        elif planet == "the Sun":
+            pass
+
+        elif sun_aspect != None:
+            return f"The sun is { sun_aspect } to { planet } in { trans_dict[planet] }"
+
+            
+               
+
+def get_moon_aspects():
+
+    planets = trans_dict.keys()
+    for planet in planets:
+        print(planet)
+        moon_aspect = get_aspects(trans_dict[planet], transit_list[1])
+        
+        moon_as_str = f"The moon is { moon_aspect } to { planet } in { trans_dict[planet] }"
+
+        if moon_aspect == None:
+            print(f"The moon has no aspects to {planet}")
+
+        elif planet == "the Moon":
+            pass
+
+        elif moon_aspect != None:
+            return moon_as_str
+                    
+
+
+get_sun_aspects()
+get_moon_aspects()
 
 def get_moon_phase(current_date):
     xmoon_dict = web_scrape.moon_dict

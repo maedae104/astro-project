@@ -54,7 +54,7 @@ class Transit(db.Model):
 
     def __repr__(self):
             return f"""Today's Transits: the sun is in: {self.sun_sign},  
-            the moon phase is: {self.moon_phase} the moon is in:{self.moon_sign}, 
+            the moon phase is: {self.moon_phase}, the moon is in: {self.moon_sign}, 
             Mercury is in: {self.merc_sign}, Venus is in: {self.venus_sign},
             Mars is in: {self.mars_sign}, Jupiter is in: {self.jup_sign},
             Saturn is in: {self.sat_sign}, Uranus is in: {self.uran_sign}
