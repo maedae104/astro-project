@@ -1,5 +1,5 @@
 from flask import (Flask, redirect, url_for, render_template, request,
-                    flash, session)
+                    flash, session, jsonify)
 import crud
 import web_scrape
 from model import connect_to_db, db, User, Transit, TextUpdates
@@ -69,8 +69,7 @@ def get_transits():
     moon_month = lunar_ecl[1]
     moon_year = lunar_ecl[0]
     
-    sun_aspects = crud.get_sun_aspects()
-    moon_aspects = crud.get_moon_aspects()
+    
 
 
     transit = Transit(date=current_date, sun_sign = sun_sign, moon_sign = moon_sign, moon_phase=moon_phase, merc_sign = merc_sign, venus_sign = venus_sign, mars_sign=mars_sign, 
@@ -79,7 +78,10 @@ def get_transits():
     db.session.add(transit)
     db.session.commit()
     
-    
+    moon_aspects = crud.get_moon_aspects()
+    sun_aspects = crud.get_sun_aspects()
+    print(sun_aspects)
+    print(moon_aspects)
 
     return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign,
                              moon_long=moon_long, moon_sign=moon_sign, current_date=current_date, 
@@ -90,14 +92,23 @@ def get_transits():
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
                              pluto_sign = pluto_sign, transit = transit, solar_ecl=solar_ecl, sun_day=sun_day,
                              sun_year=sun_year, sun_month=sun_month, lunar_ecl=lunar_ecl, moon_day = moon_day,
-                             moon_month=moon_month, moon_year=moon_year, today=today, sun_aspects= sun_aspects, moon_aspects= moon_aspects )
+                             moon_month=moon_month, moon_year=moon_year, today=today, moon_aspects= moon_aspects, sun_aspects=sun_aspects)
+
+@app.route("/transits/aspects")
+def display_view_more():
+
+    sun_aspects = crud.get_sun_aspects()
+    moon_aspects = crud.get_moon_aspects()
+
+    print(sun_aspects)
+    print(moon_aspects)
+
+    return jsonify([sun_aspects, moon_aspects])
 
 @app.route("/create-user")
 def display_create_user():
 
     return render_template("createuser.html")
-
-
 
 @app.route("/users", methods=["POST"])
 def create_user():

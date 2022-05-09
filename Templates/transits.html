@@ -43,24 +43,31 @@
 
 <div class="col-md-6">
     <div class="hidden-panel panel-default">
-        <div class="aspects-div" id="aspects-id">
+         <div class="aspects-div" id="aspects-id">
         <h3>Current Aspects</h3>
         <div class="panel panel-default">
             <div class="panel-body">
-        <ul>
-            <i class="ai sun"></i>
-            Aspects to sun: {{ sun_aspects }}
+        <i class="ai sun"></i>
+        Aspects to sun: 
+        {% for aspect in sun_aspects %}
+        <ul>  
+            {{ aspect }}
         </ul>
+        {% endfor %}
+        
+        <i class="ai moon-variant"></i>
+        Aspects to moon:
+        {% for moon_aspect in moon_aspects %}
         <ul>
-            <i class="ai moon-variant"></i>
-            Aspects to moon: {{ moon_aspects }}
+             {{ moon_aspect }}
         </ul>
+        {% endfor %}
 
             </div>
         </div>
         </div>
     </div>
-</div>
+</div> 
 
 
  
