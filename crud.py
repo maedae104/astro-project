@@ -211,6 +211,12 @@ def get_moon_phase(current_date):
     if current_date in xmoon_dict.keys():
         return xmoon_dict[current_date][0]
 
+def get_retro(current_date):
+    xretro_dict = web_scrape.retro_dict
+
+    if current_date in xretro_dict.keys():
+        return xretro_dict[current_date][0]
+
 def get_solar_eclipse():
     """pull eclipse info from swe"""
 

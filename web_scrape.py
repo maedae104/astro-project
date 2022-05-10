@@ -2,23 +2,58 @@ import requests, json
 from bs4 import BeautifulSoup
 from flask import jsonify
 
-URL = "https://mooncalendar.astro-seek.com/moon-phases-calendar-may-2022"
-page = requests.get(URL)
+moon_URL = "https://mooncalendar.astro-seek.com/moon-phases-calendar-may-2022"
+moon_page = requests.get(moon_URL)
 
-retro_URL = "https://horoscopes.astro-seek.com/retrograde-planets-astrology-calendar-2022"
+retro_URL = "https://horoscopes.astro-seek.com/mercury-retrograde-shadow-retroshade-periods"
 retro_page = requests.get(retro_URL)
 
 retro_soup = BeautifulSoup(retro_page.content, "html.parser")
-soup = BeautifulSoup(page.content, "html.parser")
+moon_soup = BeautifulSoup(moon_page.content, "html.parser")
 
-table = soup.find(id="tabs_content_container")
-rows = table.find_all("tr", class_="ruka")
+table = moon_soup.find(id="tabs_content_container")
+moon_rows = table.find_all("tr", class_="ruka")
 moon_dict = { }
 
 
-retro_table = retro_soup.find()
+retro_table = retro_soup.find("table")
+retro_rows = retro_table.find_all("tr")
 
-for row in rows:
+for r_row in retro_rows:
+    retro_dt = r_row.text.strip('\n')
+    retro_dt = retro_dt.replace("\n", " ")
+    retro_tokens = retro_dt.strip('\n').split(' ')
+    retro_tokens =  list(filter(None, retro_tokens))
+    retro_phase = ''
+    retro_ph_keys = []
+    retro_dates = []
+    retro_dict = {}
+    
+    if retro_tokens == []:
+        pass
+    else:
+        r_month_date = retro_tokens[0] + retro_tokens[1]
+        retro_dates.append(r_month_date)
+    
+        if "Retrograde" in retro_tokens[4] and "Begins" in retro_tokens[5]:
+            retro_phase = "Pre-Shadow Ends and Retrograde Begins"
+
+        elif "Retrograde" in retro_tokens[4] and "Ends" in retro_tokens[5]:
+            retro_phase = "Retrograde Ends and Post-Shadow Begins"
+
+        elif "Post-Shadow" in retro_tokens[4] and "Ends" in retro_tokens[5]:
+            retro_phase = "Post-Shadow Ends"
+
+        elif "Pre-Shadow" in retro_tokens[4] and "Begins" in retro_tokens[5]:
+            retro_phase = "Pre-shadow Begins"
+
+
+    for date in retro_dates:
+        retro_dict[date] = retro_phase
+    
+        print(retro_dict)
+
+for row in moon_rows:
     moon_dt = row.text.strip('\n')
     moon_tokens = moon_dt.strip('\n').split(' ')
     moon_phase = ''
