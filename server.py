@@ -80,8 +80,7 @@ def get_transits():
     
     moon_aspects = crud.get_moon_aspects()
     sun_aspects = crud.get_sun_aspects()
-    print(sun_aspects)
-    print(moon_aspects)
+    
 
     return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign,
                              moon_long=moon_long, moon_sign=moon_sign, current_date=current_date, 
@@ -94,16 +93,6 @@ def get_transits():
                              sun_year=sun_year, sun_month=sun_month, lunar_ecl=lunar_ecl, moon_day = moon_day,
                              moon_month=moon_month, moon_year=moon_year, today=today, moon_aspects= moon_aspects, sun_aspects=sun_aspects)
 
-@app.route("/transits/aspects")
-def display_view_more():
-
-    sun_aspects = crud.get_sun_aspects()
-    moon_aspects = crud.get_moon_aspects()
-
-    print(sun_aspects)
-    print(moon_aspects)
-
-    return jsonify([sun_aspects, moon_aspects])
 
 @app.route("/create-user")
 def display_create_user():

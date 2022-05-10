@@ -5,7 +5,7 @@
 <h3 class="today-date">Today's Date is : {{ today }} </h3>
 <input id="view-more" type="button" value="View More">
 
-<div class="col-md-8"></div>
+<div class="col-sm-3"></div>
         <div class="sun-div">
             <h3>The Sun</h3>
             <div class="panel panel-info">
@@ -20,7 +20,7 @@
 </div>
 
 
-<div class="col-md-6">
+<div class="col-md-3" offset="">
     <div class="hidden-panel panel-default">
         <div class="eclipse-div" id="eclipse-id">
         <h3>Upcoming Eclipses</h3>
@@ -41,7 +41,7 @@
     </div>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-3">
     <div class="hidden-panel panel-default">
          <div class="aspects-div" id="aspects-id">
         <h3>Current Aspects</h3>
@@ -54,7 +54,7 @@
             {{ aspect }}
         </ul>
         {% endfor %}
-        
+
         <i class="ai moon-variant"></i>
         Aspects to moon:
         {% for moon_aspect in moon_aspects %}
