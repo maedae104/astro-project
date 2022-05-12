@@ -42,6 +42,7 @@ pluto_ecl_long = pluto_calcs[0][0]
 
 
 def calculate_sign(ecl_long):
+    """Calculate the planet's current sign based on degrees"""
     sign_degrees = ecl_long
 
     if sign_degrees > 0 and sign_degrees < 30:
@@ -138,16 +139,6 @@ nept_sign = calculate_sign(nept_ecl_long)
 pluto_sign = calculate_sign(pluto_ecl_long)
 
 transit_list = [sun_sign, moon_sign, merc_sign, venus_sign, mars_sign, jup_sign, sat_sign, uran_sign, nept_sign, pluto_sign]
-# trans_dict = {
-#         sun_sign : "the Sun" ,
-#         moon_sign : "the Moon", 
-#         merc_sign : "Mercury",
-#         venus_sign : "Venus",
-#         mars_sign : "Mars",
-#         jup_sign : "Jupiter",
-#         sat_sign : "Saturn",
-#         nept_sign : "Neptune", 
-#         pluto_sign : "Pluto" }
 
 trans_dict = {
         "the Sun" : sun_sign ,
@@ -162,6 +153,8 @@ trans_dict = {
     
 
 def get_sun_aspects():
+    """Calculate aspects to the sun"""
+    
     sun_aspect_list = []
     planets = trans_dict.keys()
 
@@ -169,10 +162,6 @@ def get_sun_aspects():
         sun_aspect = get_aspects(trans_dict[planet], transit_list[0])
         sun_as_str = f"The sun is { sun_aspect } to { planet } in { trans_dict[planet] }"
         
-        # if sun_aspect == None:
-        #      no_sun_aspect = f"The sun has no aspects to {planet}"
-        #      sun_aspect_list.append(no_sun_aspect)
-
         if planet == "the Sun":
             pass
 
@@ -183,6 +172,8 @@ def get_sun_aspects():
 
 
 def get_moon_aspects():
+    """Calculate aspects to the moon"""
+
     moon_aspect_list = []
     planets = trans_dict.keys()
 
@@ -190,10 +181,6 @@ def get_moon_aspects():
         moon_aspect = get_aspects(trans_dict[planet], transit_list[1])
         
         moon_as_str = f"The moon is { moon_aspect } to { planet } in { trans_dict[planet] }"
-
-        # if moon_aspect == None:
-        #     no_asp_str = f"The moon has no aspects to {planet}"
-        #     moon_aspect_list.append(no_asp_str)
 
         if planet == "the Moon":
             pass
@@ -204,18 +191,48 @@ def get_moon_aspects():
     return moon_aspect_list
 
 
-
-
 def get_moon_phase(current_date):
+    """Get current moon phase"""
+
     xmoon_dict = web_scrape.moon_dict
     if current_date in xmoon_dict.keys():
         return xmoon_dict[current_date][0]
 
 def get_retro(current_date):
+    """get current retrogrades in the sky"""
+
     xretro_dict = web_scrape.retro_dict
 
-    if current_date in xretro_dict.keys():
-        return xretro_dict[current_date][0]
+    xretro_dates = xretro_dict.keys()
+
+   
+    current_date = today.strftime("%m%-d")
+    i=0
+    
+    while len(xretro_dates) - 1:
+        for r_date in xretro_dates:
+            if int(current_date) >= int(r_date):
+                return xretro_dict[r_date]
+
+def is_retro(retro_data):
+
+
+    retro_data = get_retro(current_date)
+
+    if "Pre-shadow Begins" in retro_data:
+        return "Mercury is in its pre-shadow"
+
+    if "Retrograde Begins" in retro_data:
+        return "Mercury is currently retrograde"
+
+    if "Post-Shadow Begins" in retro_data:
+        return "Mercury is in its post-shadow"
+
+    if "Post-Shadow Ends" in retro_data:
+        return "Mercury is stationed direct"
+
+
+
 
 def get_solar_eclipse():
     """pull eclipse info from swe"""
@@ -236,8 +253,7 @@ def get_lunar_eclipse():
     return(lun_ecl_time)
 
 
-def get_retrogrades():
-    """get current retrogrades in the sky"""
+
 
 
 def create_user(email, password, phone_number):

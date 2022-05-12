@@ -1,6 +1,8 @@
+from calendar import month_name
 import requests, json
 from bs4 import BeautifulSoup
 from flask import jsonify
+import datetime
 
 moon_URL = "https://mooncalendar.astro-seek.com/moon-phases-calendar-may-2022"
 moon_page = requests.get(moon_URL)
@@ -14,7 +16,7 @@ moon_soup = BeautifulSoup(moon_page.content, "html.parser")
 table = moon_soup.find(id="tabs_content_container")
 moon_rows = table.find_all("tr", class_="ruka")
 moon_dict = { }
-
+retro_dict = {}
 
 retro_table = retro_soup.find("table")
 retro_rows = retro_table.find_all("tr")
@@ -25,33 +27,42 @@ for r_row in retro_rows:
     retro_tokens = retro_dt.strip('\n').split(' ')
     retro_tokens =  list(filter(None, retro_tokens))
     retro_phase = ''
-    retro_ph_keys = []
-    retro_dates = []
-    retro_dict = {}
     
+    
+
     if retro_tokens == []:
         pass
     else:
-        r_month_date = retro_tokens[0] + retro_tokens[1]
-        retro_dates.append(r_month_date)
+        
+        
+        if len(retro_tokens) > 5:
+        
+            month_name = retro_tokens[0]
+            datetime_object = datetime.datetime.strptime(month_name, "%b")
+            month_number = datetime_object.month
+            if len(retro_tokens[1]) ==  1:
+                retro_tokens[1] = '0' + retro_tokens[1]
+            
+            r_month_date = str(month_number) + retro_tokens[1]
+
+            if "Retrograde" in retro_tokens[4] and "Begins" in retro_tokens[5]:
+                retro_phase = "Pre-Shadow Ends and Retrograde Begins"
+
+            if "Retrograde" in retro_tokens[4] and "Ends" in retro_tokens[5]:
+                retro_phase = "Retrograde Ends and Post-Shadow Begins"
+
+            if "Post-Shadow" in retro_tokens[4] and "Ends" in retro_tokens[5]:
+                retro_phase = "Post-Shadow Ends"
+
+            if "Pre-Shadow" in retro_tokens[4] and "Begins" in retro_tokens[5]:
+                retro_phase = "Pre-shadow Begins"
+
     
-        if "Retrograde" in retro_tokens[4] and "Begins" in retro_tokens[5]:
-            retro_phase = "Pre-Shadow Ends and Retrograde Begins"
-
-        elif "Retrograde" in retro_tokens[4] and "Ends" in retro_tokens[5]:
-            retro_phase = "Retrograde Ends and Post-Shadow Begins"
-
-        elif "Post-Shadow" in retro_tokens[4] and "Ends" in retro_tokens[5]:
-            retro_phase = "Post-Shadow Ends"
-
-        elif "Pre-Shadow" in retro_tokens[4] and "Begins" in retro_tokens[5]:
-            retro_phase = "Pre-shadow Begins"
-
-
-    for date in retro_dates:
-        retro_dict[date] = retro_phase
+            retro_dict[r_month_date] = retro_phase
+            
     
-        print(retro_dict)
+    
+    
 
 for row in moon_rows:
     moon_dt = row.text.strip('\n')
@@ -104,6 +115,7 @@ for row in moon_rows:
 
 
     moon_dict[date_only] = moon_ph_keys
+    
 
 
 

@@ -2,7 +2,7 @@
 {% block title %}Current Transits{% endblock %}
 
 {% block body %}
-<h3 class="today-date">Today's Date is : {{ today }} </h3>
+<h3 class="today-date">Current Forecast for {{ current_date }} </h3>
 <input id="view-more" type="button" value="View More">
 
 <div class="col-sm-3"></div>
@@ -63,6 +63,22 @@
         </ul>
         {% endfor %}
 
+            </div>
+        </div>
+        </div>
+    </div>
+</div> 
+
+<div class="col-md-3">
+    <div class="hidden-panel panel-default">
+         <div class="retro-div" id="retro-id">
+        <h3>Mercury Retrograde: </h3>
+        <div class="panel panel-default">
+            <div class="panel-body">
+        <i class="ai mercury"></i>
+        <ul>  
+            {{ merc_retro }}
+        </ul>
             </div>
         </div>
         </div>
@@ -145,17 +161,8 @@
     </div>
 </div>
 </div>
-
-
-
-
-
-<!-- <div class="conj-div">Conjunctions</div>
-
-<div class="sextile-div">Sextiles</div>
-<div class="square-div">Squares</div>
-<div class="trine-div">Trines</div> --> 
-
 </div>
+
+<script src="/static/TransitsAJAX.js"></script>
 
 {% endblock %}

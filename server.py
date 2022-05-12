@@ -81,6 +81,7 @@ def get_transits():
     moon_aspects = crud.get_moon_aspects()
     sun_aspects = crud.get_sun_aspects()
     
+    merc_retro = crud.is_retro(crud.get_retro(current_date))
 
     return render_template('transits.html', sun_long=sun_long, sun_sign=sun_sign,
                              moon_long=moon_long, moon_sign=moon_sign, current_date=current_date, 
@@ -91,7 +92,7 @@ def get_transits():
                              jup_sign = jup_sign, sat_sign = sat_sign, uran_sign = uran_sign, nept_sign = nept_sign,
                              pluto_sign = pluto_sign, transit = transit, solar_ecl=solar_ecl, sun_day=sun_day,
                              sun_year=sun_year, sun_month=sun_month, lunar_ecl=lunar_ecl, moon_day = moon_day,
-                             moon_month=moon_month, moon_year=moon_year, today=today, moon_aspects= moon_aspects, sun_aspects=sun_aspects)
+                             moon_month=moon_month, moon_year=moon_year, today=today, moon_aspects= moon_aspects, sun_aspects=sun_aspects, merc_retro = merc_retro)
 
 
 @app.route("/create-user")
@@ -109,7 +110,7 @@ def create_user():
     new_user = User(email=email, password=password, phone_number=phone_number)
 
     if output != None:
-        flash("OH NO, that users email already exists.")
+        flash("OH NO, that users email already exists.")                        
     else:
         flash("Good job you created an account.")
         db.session.add(new_user)
@@ -165,10 +166,15 @@ def send_user_updates():
 
     return render_template('userProfile.html')  
 
-@app.route('/user-profile')
-def display_profile():
-   
-    return render_template('userProfile.html')
+# @app.route('/user-profile')
+# def display_profile():
+    
+#     if not session['user_email']:
+#         flash("OH NO, please login to see your profile")
+#         return redirect('/login')
+
+#     else:
+#         return render_template('userProfile.html')
 
 @app.route('/user-logout')
 def logout():
