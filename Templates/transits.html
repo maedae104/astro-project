@@ -2,19 +2,31 @@
 {% block title %}Current Transits{% endblock %}
 
 {% block body %}
-<div>
+
 <h3 class="today-date">Current Forecast for {{ current_date }} </h3>
-<input id="view-more" type="button" value="View More">
-</div>
+<input id="view-more" type="button" value="View More" class="view-btn">
+
 
 <div class="sun-div">
     <h3>The Sun</h3>
     <div class="panel panel-info">
         <div class="panel-body">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjlNaM22EcD0TNu2dQNg-el8iLWUUfKt_Pww&usqp=CAU">
                 <ul>
                 <i class="ai sun"></i>
                 The sun is in: {{ sun_sign }} 
             </ul>
+            <div class="hidden-panel panel-default">
+                <div class="aspects-div" id="aspects-sun">
+        <i class="ai sun"></i>
+        Aspects to sun: 
+        {% for aspect in sun_aspects %}
+        <ul>  
+            {{ aspect }}
+        </ul>
+        {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
   </div>
@@ -24,7 +36,7 @@
         <h3>Upcoming Eclipses</h3>
         <div class="panel panel-default">
             <div class="panel-body">
-        <ul>
+        <ul><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyEXrzfFHU-WQlDzE2Y-Hiw00lYN-Z5XfIJg&usqp=CAU">
             <i class="ai sun"></i>
             The next Solar Eclipse happens on: {{ sun_month }} {{ sun_day }} {{ sun_year }}
         </ul>
@@ -84,6 +96,7 @@
     <h3>The Moon</h3>
     <div class="panel panel-info">
         <div class="panel-body">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStTDD2N_ejqaTCi6abW0eyjvuP95FHdsxi1w&usqp=CAU">
                 <ul>
                     <i class="ai moon-variant"></i>
                     The moon is in: {{ moon_sign }}
@@ -92,6 +105,19 @@
                     <i class="ai moon-variant"></i>
                     The moon phase is in: {{ moon_phase }} 
                 </ul>
+            <div class="hidden-panel panel-default">
+                <div class="aspects-div" id="aspects-moon">
+            <i class="ai moon-variant"></i>
+            Aspects to moon:
+             {% for moon_aspect in moon_aspects %}
+            <ul>
+                {{ moon_aspect }}
+            </ul>
+        {% endfor %}
+            </div>
+        </div>
+                </div>
+            </div>
         </div>
     </div>   
 </div>
@@ -102,6 +128,7 @@
         <h3>Personal Planets</h3>
     <div class="panel panel-default">
         <div class="panel-body">
+            <img src="data:image/jpeg;base64,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">
             <ul>
                 <i class="ai mercury"></i>
                 Mercury is in: {{ merc_sign }}    
@@ -130,6 +157,7 @@
         <h3>Generational Planets</h3>
     <div class="panel panel-default">
         <div class="panel-body">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKZQ6a1Ome9GMST3f6oere957FgZbZMyO3jg&usqp=CAU">
         <ul>
         <i class="ai neptune"></i>
         Neptune is in: {{ nept_sign }}

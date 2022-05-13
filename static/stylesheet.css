@@ -7,12 +7,21 @@ img.banner {
     z-index: -1;
   }
 
+.today-date {
+    text-align: center;
+    font-size: 2.5em;
 
+}
+
+input.view-btn {
+    float: right;
+
+}
 
   div.sun-div {
  	width: 300px;
   	padding: 10px;
-    margin-top: 130px;
+    margin-top: 300px;
     margin : 20px;
     border-radius: 25px;
     border-color: rgb(27, 73, 101);
@@ -94,8 +103,8 @@ div.inner-planet-div {
 
 div.panel-body {
     background-color: rgb(142, 202, 230);
-    color: rgb(255, 255, 255);
-    border-radius: 25px;
+    color: rgb(247, 202, 22);
+    /* border-radius: 25px; */
     border-color: rgb(27, 73, 101);
     border: 3px solid;
 
