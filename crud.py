@@ -254,8 +254,6 @@ def get_lunar_eclipse():
 
 
 
-
-
 def create_user(email, password, phone_number):
     """Create and return a new user."""
 

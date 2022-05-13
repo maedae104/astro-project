@@ -107,14 +107,19 @@ def create_user():
     password = request.form.get("password")
     phone_number = request.form.get("phone")
     output = crud.get_user_by_email(email)
-    new_user = User(email=email, password=password, phone_number=phone_number)
+    
+
+    # print("new user: ", new_user)
 
     if output != None:
         flash("OH NO, that users email already exists.")                        
     else:
         flash("Good job you created an account.")
+        new_user = User(email=email, password=password, phone_number=phone_number)
         db.session.add(new_user)
         db.session.commit()
+        print("Reached here, check db")
+        print("check new user again: ", new_user)
 
     return redirect("/")
 
@@ -139,13 +144,15 @@ def user_login():
         session["user_email"] = user.email
         flash(f"Welcome back, {user.email}!")
 
-    return render_template('userProfile.html')
+    return redirect('/user-profile')
 
 @app.route("/updates")
 def send_user_updates():
 
-    transit_update = Transit.query.filter_by(date = crud.current_date)
-    email = request.form.get("email")
+    transit_update = Transit.query.filter_by(date = crud.current_date).first()
+    print("transit update: ", transit_update)
+    email = session['user_email']
+    print("email: ", email)
     user = crud.get_user_by_email(email)
     
     account_sid = "AC991a3de185a36e54239a02cf95ce35de"
@@ -160,7 +167,8 @@ def send_user_updates():
     )
     print(message)
 
-    text_update = TextUpdates(transit_date = date, user_id = user.user_id)
+
+    text_update = TextUpdates(transit_date = date.today(), user_id = user.user_id, transit_id = transit_update.transit_id)
     db.session.add(text_update)
     db.session.commit()
 

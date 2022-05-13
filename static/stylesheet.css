@@ -78,15 +78,15 @@ div.inner-planet-div {
 
   div.aspects-div {
     display: none;
-	float: right;
- 	width: 300px;
-  	padding: 10px;
-    margin : 20px;
+	/* float: right; */
+ 	width: 200px;
+  	/* padding: 10px; */
+    /* margin : 20px; */
     /* background-color: rgb(33, 158, 188); */
-    border-radius: 25px;
+    /* border-radius: 25px; */
+    /* border-color: rgb(27, 73, 101);
     border-color: rgb(27, 73, 101);
-    border-color: rgb(27, 73, 101);
-    border: 3px solid;
+    border: 3px solid; */
   }  
 
   div.retro-div {
@@ -120,7 +120,7 @@ div.panel-body {
 
   .ai {
     font-style:normal;
-    color:purple;
+    color:navy;
     font-weight:bold;
     font-size:24px;
     line-height:24px;
