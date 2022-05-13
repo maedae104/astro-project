@@ -2,14 +2,15 @@
 {% block title %}Current Transits{% endblock %}
 
 {% block body %}
+<div>
 <h3 class="today-date">Current Forecast for {{ current_date }} </h3>
 <input id="view-more" type="button" value="View More">
+</div>
 
-<div class="col-sm-3"></div>
-        <div class="sun-div">
-            <h3>The Sun</h3>
-            <div class="panel panel-info">
-              <div class="panel-body">
+<div class="sun-div">
+    <h3>The Sun</h3>
+    <div class="panel panel-info">
+        <div class="panel-body">
                 <ul>
                 <i class="ai sun"></i>
                 The sun is in: {{ sun_sign }} 
@@ -17,12 +18,9 @@
         </div>
     </div>
   </div>
-</div>
 
-
-<div class="col-md-3" offset="">
-    <div class="hidden-panel panel-default">
-        <div class="eclipse-div" id="eclipse-id">
+<div class="hidden-panel panel-default">
+    <div class="eclipse-div" id="eclipse-id">
         <h3>Upcoming Eclipses</h3>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -37,13 +35,12 @@
 
             </div>
         </div>
-        </div>
     </div>
 </div>
 
-<div class="col-md-3">
-    <div class="hidden-panel panel-default">
-         <div class="aspects-div" id="aspects-id">
+
+<div class="hidden-panel panel-default">
+    <div class="aspects-div" id="aspects-id">
         <h3>Current Aspects</h3>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -65,13 +62,12 @@
 
             </div>
         </div>
-        </div>
     </div>
 </div> 
 
-<div class="col-md-3">
-    <div class="hidden-panel panel-default">
-         <div class="retro-div" id="retro-id">
+
+<div class="hidden-panel panel-default">
+    <div class="retro-div" id="retro-id">
         <h3>Mercury Retrograde: </h3>
         <div class="panel panel-default">
             <div class="panel-body">
@@ -81,18 +77,13 @@
         </ul>
             </div>
         </div>
-        </div>
     </div>
 </div> 
 
-
- 
-   
-        <div class="col-md-12">
-        <div class="moon-div">
-            <h3>The Moon</h3>
-            <div class="panel panel-info">
-              <div class="panel-body">
+<div class="moon-div">
+    <h3>The Moon</h3>
+    <div class="panel panel-info">
+        <div class="panel-body">
                 <ul>
                     <i class="ai moon-variant"></i>
                     The moon is in: {{ moon_sign }}
@@ -101,18 +92,16 @@
                     <i class="ai moon-variant"></i>
                     The moon phase is in: {{ moon_phase }} 
                 </ul>
-                </div>
-            </div>   
-    </div>
-  </div>
+        </div>
+    </div>   
+</div>
 
-  
 
-        <div class="col-md-8">
-    <div class="inner-planet-div">
+
+<div class="inner-planet-div">
         <h3>Personal Planets</h3>
-        <div class="panel panel-default">
-          <div class="panel-body">
+    <div class="panel panel-default">
+        <div class="panel-body">
             <ul>
                 <i class="ai mercury"></i>
                 Mercury is in: {{ merc_sign }}    
@@ -133,34 +122,28 @@
                 <i class="ai saturn"></i>
                 Saturn is in: {{ sat_sign }}   
             </ul>
-                </div>
-            </div>
         </div>
     </div>
-    </div>
- 
+</div>
 
-        <div class="col-md-6">
-        <div class="outer-planet-div">
-            <h3>Generational Planets</h3>
-             <div class="panel panel-default">
+<div class="outer-planet-div">
+        <h3>Generational Planets</h3>
+    <div class="panel panel-default">
         <div class="panel-body">
-    <ul>
+        <ul>
         <i class="ai neptune"></i>
         Neptune is in: {{ nept_sign }}
-    </ul>
-    <ul>
+        </ul>
+        <ul>
         <i class="ai uranus"></i>
         Uranus is in: {{ uran_sign }}
-    </ul>
-    <ul>
+        </ul>
+        <ul>
         <i class="ai pluto"></i>
-        Pluto is in: {{ pluto_sign }}    </ul>
-            </div>
+        Pluto is in: {{ pluto_sign }}    
+        </ul>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 <script src="/static/TransitsAJAX.js"></script>

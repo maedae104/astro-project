@@ -166,15 +166,16 @@ def send_user_updates():
 
     return render_template('userProfile.html')  
 
-# @app.route('/user-profile')
-# def display_profile():
+@app.route('/user-profile')
+def display_profile():
     
-#     if not session['user_email']:
-#         flash("OH NO, please login to see your profile")
-#         return redirect('/login')
+    # if not session['user_email']:
+    #     flash("OH NO, please login to see your profile")
+    #     return redirect('/login')
 
-#     else:
-#         return render_template('userProfile.html')
+    # else:
+    
+    return render_template('userProfile.html')
 
 @app.route('/user-logout')
 def logout():

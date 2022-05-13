@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Astrology Forecast{% endblock %}
+
+{% block body %}
+
+<div class="login-div"> Log In
+    <form action="/login" method="POST">
+      <p>
+        Email <input type="text" name="email">
+      </p>
+  
+      <p>
+        Password <input type="password" name="password">
+      </p>
+  
+      <p>
+        <input type="submit">
+      </p>
+    </form>
+  </div>
+
+{% endblock %}
+</body>
+</html>
