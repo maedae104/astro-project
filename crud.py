@@ -2,7 +2,7 @@ import json
 import swisseph as swe
 import web_scrape
 from model import connect_to_db, db, User, Transit, TextUpdates
-from datetime import date
+from datetime import date, datetime, timedelta
 from flask_sqlalchemy import SQLAlchemy
 
 swe.set_ephe_path('/usr/share/sweph/ephe')
@@ -10,11 +10,35 @@ swe.set_ephe_path('/usr/share/sweph/ephe')
 today = date.today()
 c_today = today.strftime("%Y %m %d")
 c_today = c_today.split(' ')
+
 year = int(c_today[0])
 month = int(c_today[1])
 day = int(c_today[2])
+
 current_date = today.strftime("%b%-d")
 converted_date = swe.julday(year, month, day)
+
+yesterday = today - timedelta(days=1)
+
+c_yday = yesterday.strftime("%Y %m %d")
+c_yday = c_yday.split(' ')
+
+y_day = int(c_yday[2])
+y_year = int(c_yday[0])
+y_month = int(c_yday[1])
+
+y_converted = swe.julday(y_year, y_month, y_day)
+
+tomorrow = today + timedelta(days=1)
+
+c_tday = tomorrow.strftime("%Y %m %d")
+c_tday = c_tday.split(' ')
+
+t_day = int(c_yday[2])
+t_year = int(c_yday[0])
+t_month = int(c_yday[1])
+
+t_converted = swe.julday(t_year, t_month, t_day)
 
 
 sun_calcs = swe.calc_ut(converted_date, 0)
@@ -40,6 +64,50 @@ uran_ecl_long =uran_calcs[0][0]
 nept_ecl_long = nept_calcs[0][0]
 pluto_ecl_long = pluto_calcs[0][0]
 
+y_sun_calcs = swe.calc_ut(y_converted, 0)
+y_moon_calcs = swe.calc_ut(y_converted, 1)
+y_merc_calcs = swe.calc_ut(y_converted, 2)
+y_venus_calcs = swe.calc_ut(y_converted, 3)
+y_mars_calcs = swe.calc_ut(y_converted, 4)
+y_jup_calcs = swe.calc_ut(y_converted, 5)
+y_sat_calcs = swe.calc_ut(y_converted, 6)
+y_uran_calcs = swe.calc_ut(y_converted, 7)
+y_nept_calcs = swe.calc_ut(y_converted, 8)
+y_pluto_calcs = swe.calc_ut(y_converted, 9)
+
+y_sun_ecl_long = y_sun_calcs[0][0]
+y_moon_ecl_long = y_moon_calcs[0][0]
+y_merc_ecl_long = y_merc_calcs[0][0]
+y_venus_ecl_long = y_venus_calcs[0][0]
+y_mars_ecl_long = y_mars_calcs[0][0]
+y_jup_ecl_long = y_jup_calcs[0][0]
+y_sat_ecl_long = y_sat_calcs[0][0]
+y_uran_ecl_long = y_uran_calcs[0][0]
+y_nept_ecl_long = y_nept_calcs[0][0]
+y_pluto_ecl_long = y_pluto_calcs[0][0]
+
+
+t_sun_calcs = swe.calc_ut(t_converted, 0)
+t_moon_calcs = swe.calc_ut(t_converted, 1)
+t_merc_calcs = swe.calc_ut(t_converted, 2)
+t_venus_calcs = swe.calc_ut(t_converted, 3)
+t_mars_calcs = swe.calc_ut(t_converted, 4)
+t_jup_calcs = swe.calc_ut(t_converted, 5)
+t_sat_calcs = swe.calc_ut(t_converted, 6)
+t_uran_calcs = swe.calc_ut(t_converted, 7)
+t_nept_calcs = swe.calc_ut(t_converted, 8)
+t_pluto_calcs = swe.calc_ut(t_converted, 9)
+
+t_sun_ecl_long = t_sun_calcs[0][0]
+t_moon_ecl_long = t_moon_calcs[0][0]
+t_merc_ecl_long = t_merc_calcs[0][0]
+t_venus_ecl_long = t_venus_calcs[0][0]
+t_mars_ecl_long = t_mars_calcs[0][0]
+t_jup_ecl_long = t_jup_calcs[0][0]
+t_sat_ecl_long = t_sat_calcs[0][0]
+t_uran_ecl_long = t_uran_calcs[0][0]
+t_nept_ecl_long = t_nept_calcs[0][0]
+t_pluto_ecl_long = t_pluto_calcs[0][0]
 
 def calculate_sign(ecl_long):
     """Calculate the planet's current sign based on degrees"""
@@ -101,31 +169,31 @@ def get_aspects(planet_a, planet_b):
     
 
     if sign_dict[planet_b] == sign_dict[planet_a]:
-        return "conjunct"
+        return "Conjunct"
 
     elif sign_dict[planet_b] == sign_dict[planet_a] + 2 or sign_dict[planet_b] == sign_dict[planet_a] + 10:
-        return "sextile"
+        return "Sextile"
 
     elif sign_dict[planet_a] == sign_dict[planet_b] + 2 or sign_dict[planet_a] == sign_dict[planet_b] + 10:
-        return "sextile"
+        return "Sextile"
 
     elif sign_dict[planet_b] == sign_dict[planet_a] + 3 or sign_dict[planet_b] == sign_dict[planet_a] + 9:
-        return "square"
+        return "Square"
 
     elif sign_dict[planet_a] == sign_dict[planet_b] + 3 or sign_dict[planet_a] == sign_dict[planet_b] + 9:
-        return "square"
+        return "Square"
     
     elif sign_dict[planet_b] == sign_dict[planet_a] + 4 or sign_dict[planet_b] == sign_dict[planet_a] + 8:
-        return "trine"
+        return "Trine"
 
     elif sign_dict[planet_a] == sign_dict[planet_b] + 4 or sign_dict[planet_a] == sign_dict[planet_b] + 8:
-        return "trine"
+        return "Trine"
 
     elif sign_dict[planet_b] == sign_dict[planet_a] + 6:
-        return "opposition"
+        return "Opposition"
 
     elif sign_dict[planet_a] == sign_dict[planet_b] + 6:
-        return "opposition"
+        return "Opposition"
             
 sun_sign = calculate_sign(sun_ecl_long)
 moon_sign = calculate_sign(moon_ecl_long)
@@ -151,6 +219,55 @@ trans_dict = {
         "Neptune" : nept_sign , 
         "Pluto" : pluto_sign }
     
+y_sun_sign = calculate_sign(y_sun_ecl_long)
+y_moon_sign = calculate_sign(y_moon_ecl_long)
+y_merc_sign = calculate_sign(y_merc_ecl_long)
+y_venus_sign = calculate_sign(y_venus_ecl_long)
+y_mars_sign = calculate_sign(y_mars_ecl_long)
+y_jup_sign = calculate_sign(y_jup_ecl_long)
+y_sat_sign = calculate_sign(y_sat_ecl_long)
+y_uran_sign = calculate_sign(y_uran_ecl_long)
+y_nept_sign = calculate_sign(y_nept_ecl_long)
+y_pluto_sign = calculate_sign(y_pluto_ecl_long)
+
+y_transit_list = [y_sun_sign, y_moon_sign, y_merc_sign, y_venus_sign,
+y_mars_sign, y_jup_sign, y_sat_sign, y_uran_sign, y_nept_sign, y_pluto_sign]
+
+y_trans_dict = {
+        "the Sun" : y_sun_sign ,
+        "the Moon" : y_moon_sign , 
+        "Mercury" : y_merc_sign ,
+        "Venus" : y_venus_sign  ,
+        "Mars" : y_mars_sign  ,
+        "Jupiter" : y_jup_sign ,
+        "Saturn" : y_sat_sign ,
+        "Neptune" : y_nept_sign , 
+        "Pluto" : y_pluto_sign }
+
+t_sun_sign = calculate_sign(t_sun_ecl_long)
+t_moon_sign = calculate_sign(t_moon_ecl_long)
+t_merc_sign = calculate_sign(t_merc_ecl_long)
+t_venus_sign = calculate_sign(t_venus_ecl_long)
+t_mars_sign = calculate_sign(t_mars_ecl_long)
+t_jup_sign = calculate_sign(t_jup_ecl_long)
+t_sat_sign = calculate_sign(t_sat_ecl_long)
+t_uran_sign = calculate_sign(t_uran_ecl_long)
+t_nept_sign = calculate_sign(t_nept_ecl_long)
+t_pluto_sign = calculate_sign(t_pluto_ecl_long)
+
+t_transit_list = [t_sun_sign, t_moon_sign, t_merc_sign, t_venus_sign,
+t_mars_sign, t_jup_sign, t_sat_sign, t_uran_sign, t_nept_sign, t_pluto_sign]
+
+t_trans_dict = {
+        "the Sun" : t_sun_sign ,
+        "the Moon" : t_moon_sign , 
+        "Mercury" : t_merc_sign ,
+        "Venus" : t_venus_sign  ,
+        "Mars" : t_mars_sign  ,
+        "Jupiter" : t_jup_sign ,
+        "Saturn" : t_sat_sign ,
+        "Neptune" : t_nept_sign , 
+        "Pluto" : t_pluto_sign }
 
 def get_sun_aspects():
     """Calculate aspects to the sun"""
@@ -160,7 +277,7 @@ def get_sun_aspects():
 
     for planet in planets:
         sun_aspect = get_aspects(trans_dict[planet], transit_list[0])
-        sun_as_str = f"The sun is { sun_aspect } to { planet } in { trans_dict[planet] }"
+        sun_as_str = f"{ sun_aspect } to { planet } in { trans_dict[planet] }"
         
         if planet == "the Sun":
             pass
@@ -170,6 +287,41 @@ def get_sun_aspects():
     
     return sun_aspect_list 
 
+def y_get_sun_aspects():
+    """Calculate aspects to the sun"""
+    
+    sun_aspect_list = []
+    planets = y_trans_dict.keys()
+
+    for planet in planets:
+        y_sun_aspect = get_aspects(y_trans_dict[planet], transit_list[0])
+        sun_as_str = f"{ y_sun_aspect } to { planet } in { y_trans_dict[planet] }"
+        
+        if planet == "the Sun":
+            pass
+
+        elif y_sun_aspect != None:
+             sun_aspect_list.append(sun_as_str)
+    
+    return sun_aspect_list 
+
+def t_get_sun_aspects():
+    """Calculate aspects to the sun"""
+    
+    sun_aspect_list = []
+    planets = t_trans_dict.keys()
+
+    for planet in planets:
+        t_sun_aspect = get_aspects(t_trans_dict[planet], transit_list[0])
+        sun_as_str = f"{ t_sun_aspect } to { planet } in { t_trans_dict[planet] }"
+        
+        if planet == "the Sun":
+            pass
+
+        elif t_sun_aspect != None:
+             sun_aspect_list.append(sun_as_str)
+    
+    return sun_aspect_list 
 
 def get_moon_aspects():
     """Calculate aspects to the moon"""
@@ -180,7 +332,7 @@ def get_moon_aspects():
     for planet in planets:
         moon_aspect = get_aspects(trans_dict[planet], transit_list[1])
         
-        moon_as_str = f"The moon is { moon_aspect } to { planet } in { trans_dict[planet] }"
+        moon_as_str = f"{ moon_aspect } to { planet } in { trans_dict[planet] }"
 
         if planet == "the Moon":
             pass
@@ -190,6 +342,43 @@ def get_moon_aspects():
         
     return moon_aspect_list
 
+def y_get_moon_aspects():
+    """Calculate aspects to the moon"""
+
+    moon_aspect_list = []
+    planets = y_trans_dict.keys()
+
+    for planet in planets:
+        y_moon_aspect = get_aspects(y_trans_dict[planet], y_transit_list[1])
+        
+        moon_as_str = f"{ y_moon_aspect } to { planet } in { y_trans_dict[planet] }"
+
+        if planet == "the Moon":
+            pass
+
+        elif y_moon_aspect != None:
+            moon_aspect_list.append(moon_as_str)
+        
+    return moon_aspect_list
+
+def t_get_moon_aspects():
+    """Calculate aspects to the moon"""
+
+    moon_aspect_list = []
+    planets = t_trans_dict.keys()
+
+    for planet in planets:
+        t_moon_aspect = get_aspects(t_trans_dict[planet], t_transit_list[1])
+        
+        moon_as_str = f"{ t_moon_aspect } to { planet } in { t_trans_dict[planet] }"
+
+        if planet == "the Moon":
+            pass
+
+        elif t_moon_aspect != None:
+            moon_aspect_list.append(moon_as_str)
+        
+    return moon_aspect_list
 
 def get_moon_phase(current_date):
     """Get current moon phase"""
@@ -230,8 +419,6 @@ def is_retro(retro_data):
 
     if "Post-Shadow Ends" in retro_data:
         return "Mercury is stationed direct"
-
-
 
 
 def get_solar_eclipse():

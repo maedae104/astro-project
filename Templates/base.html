@@ -2,7 +2,6 @@
 <html>
   <head>
     <link rel="stylesheet" href="/static/stylesheet.css">
-  
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
   <title>AstroForecast</title>
@@ -11,7 +10,9 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300&display=swap" rel="stylesheet">
     <title>
       {% block title %}Astro Forecast{% endblock %}
     </title>
@@ -22,21 +23,27 @@
     
   </head>
   <body>
+    <section class="background">
     <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">AstroForecast</a>
+          <a class="navbar-brand" href="#">AstroForecast</a>
         </div>
         <ul class="nav navbar-nav">
           <li class="active"><a href="/">Home</a></li>
-          </li>
           <li><a href="/transits">Today's Transits</a></li>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/create-user">Register</a></li>
-          <li><a href="/user-profile">User Profile</a></li>
-          </ul>
+          <li><a href="/user-profile" claas="userprofile-link" id="userprofile-link">User Profile</a></li>
+        </ul>
+        <div class="pull-right">
+        <div class="login-container">
+          <a class="btn btn-default btn-rounded mb-4" href="/login">Sign In</a>
+          <a class="btn btn-default btn-rounded mb-4" href="/create-user">Sign Up</a>
+          <a href="/logout" id="logout-link">Logout</a>
+        </div>
+      </div>
     </nav>
-    <img src="https://t3.ftcdn.net/jpg/04/19/07/32/240_F_419073208_xNRkwGBIqLs85hfSBWVun6Vai4qvjKcW.jpg" class="banner">
+  
+  
 
     {% for msg in get_flashed_messages() %}
     <p class="flash-msg">
@@ -45,10 +52,17 @@
     {% endfor %}
 
     {% block body %}
-
+ 
     {% endblock %}
-
-    {% block after_body %}{% endblock %}
-
+  
+    {% block after_body %}
+  
+     
+  
+    {% endblock %}
+  
   </body>
+</section>
+<section class="background">
+</section>
 </html>

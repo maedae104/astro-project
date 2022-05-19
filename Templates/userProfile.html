@@ -6,14 +6,13 @@
 
 <h1>Welcome back {{ session["user_email"] }}</h1>
 
-<div class="col-sm-8">
-    <div class="panel panel-default">
+<div class="media-block-profile">
+  <div class="media-box">
+  
+</div>
         <div class="profile-card">
             <h3>{{ session["user_email"] }} profile details</h3>
             <a href="/user-logout">Logout</a>
-            <div class="panel panel-info">
-              <div class="panel-body">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiW835ii86P8bahJQEr0n4yoY4ICEE1bBF0A&usqp=CAU">
                 <ul>
                 Email: {{ session["user_email"] }}
                 </ul>
@@ -24,10 +23,7 @@
                     <button type="button" id="text-button">Send me a text update!</button>
                 </ul>
         </div>
-    </div>
-  </div>
-</div>
-
+      </div>
 
 
 

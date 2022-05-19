@@ -3,8 +3,9 @@
 
 {% block body %}
   
-
-  <div class="create-div"> Create User
+<div class="media-block-r">
+  <div class="media-box">
+  <div class="create-div"> Sign Up
   <form action="/users" method="POST">
     <p>
       Email <input type="text" name="email">
@@ -16,12 +17,17 @@
 
     <p>
       Password <input type="password" name="password">
+
+      <p>
+        Confirm Password <input type="password" name="confirm-password">
+      </p>
     </p>
     <p>
       <input type="submit">
     </p>
   </form>
-
+</div>
+</div>
 </div>
 {% endblock %}
 </body>
