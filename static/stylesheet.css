@@ -8,22 +8,32 @@ section{
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-    height: 1900px;
+    height: 1700px;
     width: 100%;
     
+}
+
+.profie-title {
+    font-family: 'Space Grotesk', sans-serif;
+    text-align: center;
+    font-size: 20pt;
+    font-weight: 800;
 }
 
 .today-date {
     text-align: center;
     font-size: 2.5em;
     font-family: 'Space Grotesk', sans-serif;
-    text-decoration: underline;
-
+    /* text-decoration: underline; */
+    color:#C4C4C4;
 }
+
+
 .sun-div {
     position: relative;
     align-items: center;
-    top: 100px;
+    top: 147px;
+    left: -12px;
 }
 
 
@@ -31,7 +41,7 @@ section{
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
     font-size: 28pt;
-    text-decoration: underline;
+    /* text-decoration: underline; */
     font-weight: 800;
 }
 
@@ -45,7 +55,6 @@ section{
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
     font-size: 20pt;
-    text-decoration: underline;
     font-weight: 800;
 }
 
@@ -55,53 +64,65 @@ section{
     font-size: 14pt;
 }
 
-.solar-eclipse-text {
-    font-family: 'Space Grotesk', sans-serif;
-    text-align: center;
-    font-size: 18pt;
-}
 
 .solar-ecl-title {
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
     font-size: 18pt;
-    text-decoration: underline;
-    font-weight: 800;
 }
 
+.solar-ecl-text {
+    font-family: 'Space Grotesk', sans-serif;
+    text-align: center;
+    
+}
+
+.eclipse-div {
+    position: relative;
+    align-items: center;
+    text-align: center;
+    top: 76px;
+    font-size: 18pt;
+}
 
 .moon-title {
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
     font-size: 28pt;
-    text-decoration: underline;
+    /* text-decoration: underline; */
     font-weight: 800;
 }
 
 .moon-text {
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
-    font-size: 24pt;
+    font-size: 20pt;
 }
 
 .moon-div {
     position: relative;
     align-items: center;
-    top: 100px;
+    top: 156px;
+    left: -16px;
 }
 
-
-.aspects-div {
+.aspect-title-div {
+    left: 6px;
     position: relative;
     align-items: center;
-    top: 100px;
+    top: 94px;
+}
+.aspects-div {
+    left: 40px;
+    position: relative;
+    align-items: center;
+    top: 107px;
 }
 
 .moon-aspects-title {
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
     font-size: 18pt;
-    text-decoration: underline;
     font-weight: 800;
 }
 .moon-aspects-text {
@@ -113,13 +134,13 @@ section{
 .lunar-eclipse-div {
     position: relative;
     align-items: center;
+    top: 77px;
 }
 
 .lunar-ecl-title{
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
     font-size: 18pt;
-    text-decoration: underline;
     font-weight: 800;
 }
 
@@ -133,7 +154,6 @@ section{
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
     font-size: 18pt;
-    text-decoration: underline;
     font-weight: 800;
 }
 .inner-planet-text {
@@ -146,138 +166,153 @@ section{
     position: relative;
     width: 1728px;
     height: 600px;
-    left: 100px;
-    top: 10px;
+    left: -211%;
+    top: 41px;
     font-family: 'Space Grotesk', sans-serif;
+    font-size: 11pt;
+    text-align: center;
 }
 
 .outer-planets-title{
     font-family: 'Space Grotesk', sans-serif;
     text-align: center;
     font-size: 18pt;
-    text-decoration: underline;
     font-weight: 800;
 }
 .outer-planets {
     position: relative;
     width: 1728px;
     height: 600px;
-    right: -100px;
-    top: 70px;
+    right: -35px;
+    top: 46px;
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 14pt
+    font-size: 14pt;
 }
 
 .date-rectangle {
     position: absolute;
-    width: 500px;
-    height: 75px;
+    width: 357px;
+    height: 100px;
     background: #C4C4C4;
     opacity: 60%;
-    left: 35%;
+    left: 38%;
+    border-radius: 49%;
+    top: 55px;
+}
+
+.welcome-rectangle {
+    position: absolute;
+    width: 500px;
+    height: 75px;
+    background: white;
+    opacity: 60%;
+    left: 460px;
+    top: 53px;
 }
 
 .rectangle-1 {
     position: absolute;
-    width: 800px;
-    height: 407px;
-    left: 380px;
+    width: 500px;
+    height: 466px;
+    left: 516px;
     top: 214px;
     background: rgba(242, 242, 242, 1);
     opacity: 50%;
+    border-radius: 50%;
 }
 
 .rectangle-2 {
-    width: 497px;
+    width: 409px;
     height: 400px;
-    left: 19px;
-    top: 200px;
+    left: 47px;
+    top: 338px;
     background: #C4C4C4;
     position: relative;
     opacity: 50%;
+    border-radius: 50%;
     }
 
 .rectangle-3 {
 
     position: absolute;
-    width: 400px;
-    height: 100px;
-    left: 1007px;
-    top: 190px;
+    width: 295px;
+    height: 252px;
+    left: 1064px;
+    top: 137px;
     background: #C4C4C4;
+    border-radius: 50%;
     opacity: 80%;
-        
+    
     }
 
 .rectangle-4 {
     position: absolute;
-    width: 800px;
-    height: 407px;
-    left: 380px;
+    width: 500px;
+    height: 466px;
+    left: 527px;
     top: 900px;
     background: rgba(242, 242, 242, 1);
     opacity: 50%;
+    border-radius: 50%;
 }
 
 .rectangle-5 {
-    width: 497px;
-    height: 400px;
-    left: 19px;
-    top: 450px;
+    left: 73px;
+    top: 598px;
     background: #C4C4C4;
     position: relative;
     opacity: 50%;
-
+    border-radius: 50%;
+    width: 409px;
+    height: 400px;
 }
 
 .rectangle-6 {
     position: absolute;
-    width: 400px;
-    height: 100px;
-    left: 1000px;
-    top: 875px;
+    width: 295px;
+    height: 253px;
+    left: 1084px;
+    top: 839px;
     background: #C4C4C4;
+    border-radius: 50%;
     opacity: 80%;
 }
 
-.inner-planets {
-    position: relative;
-    width: 1728px;
-    height: 600px;
-    left: 15px;
-    top: 50px;
-    font-family: 'Space Grotesk', sans-serif;
-}
 
 .media-block-r {
     position: absolute;
-    width: 50%;
-    height: 600px;
-    top: 1500px;
     background: #000000;
     opacity: 80%;
+    border-radius: 25%;
+    width: 39%;
+    height: 542px;
+    left: 7%;
+    top: 1643px;
 
 }
 
 .media-block-l {
 
     position: absolute;
-    width: 50%;
-    height: 600px;
-    top: 2100px;
+    width: 39%;
+    height: 542px;
+    top: 2178px;
     left: 720px;
     background: #000000;
     opacity: 80%;
-    }
+    border-radius: 25%;
+ }
 
 .media-block-profile {
     
-position: absolute;
-width: 387px;
-height: 834px;
-left: 694px;
-top: 283px;
-background: #000000;
+    position: relative;
+    width: 800px;
+    height: 834px;
+    left: 320px;
+    top: 100px;
+    opacity: 70%;
+    background: #000000;
+    border-radius: 25%;
     }
     
 .profile-box-title {
@@ -286,48 +321,91 @@ width: 126px;
 height: 24px;
 left: 72px;
 top: 92px;
-
 font-family: 'Space Grotesk', sans-serif;
 font-style: normal;
 font-weight: 500;
 font-size: 20px;
 line-height: 23px;
-/* identical to box height */
-
 display: flex;
 align-items: center;
 text-align: center;
-
 color: #000000;
+}
+
+.porfile-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14pt;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.profile-text {
+
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14pt;
+    text-decoration: underline;
+    font-weight: 700;
 }
 .media-box-profile {
 
-position: absolute;
-width: 279px;
-height: 423px;
-left: 753px;
-top: 385px;
-background: black;   
-    }
+    position: relative;
+    width: 800px;
+    height: 834px;
+    left: 320px;
+    top: 100px;
+    background: #000000;
+    border-radius: 25%;
+}
+.profile-card {
+    position: relative;
+    left: 100px;
+    top: 60px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+.text-button-div {
+    top: 350px;
+    position: absolute;
+    left: 100px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.login-div {
+    position: relative;
+    left: 100px;
+    top: 60px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.create-div {
+    position: relative;
+    left: 156px;
+    top: 60px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.icon{
+    vertical-align: middle;
+    left: 100px;
+    top: -40px;
+    position: relative;
+}
+
 
 .media-profile-text {
-    position: absolute;
+position: absolute;
 width: 193px;
 height: 100px;
 left: 39px;
 top: 182px;
-
 font-family: 'Space Grotesk', sans-serif;
 font-style: normal;
 font-weight: 400;
 font-size: 14px;
 line-height: 34px;
-/* or 243% */
-
 text-align: center;
-
 color: rgba(0, 0, 0, 0.5);
 }
+
 .media-box {
 
     position: absolute;
@@ -336,6 +414,7 @@ color: rgba(0, 0, 0, 0.5);
     top: 20%;
     bottom: 20%;
     background: white;
+    border-radius: 25%;
 }
 
 .y-btn {
@@ -343,15 +422,25 @@ color: rgba(0, 0, 0, 0.5);
     left: 250px;
     right: 70%;
     bottom: -2100px;
+    background-color: black;
+    color: white;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14pt;
+    border-radius: 12px;
+    opacity: 75%;
 }
-
 
 .tom-btn {
     position: absolute;
     left: 69.79%;
     right: 16.32%;
     bottom: -2100px;
+    background-color: black;
+    color: white;
     font-family: 'Space Grotesk', sans-serif;
+    font-size: 14pt;
+    border-radius: 12px;
+    opacity: 75%;
 }
 
 .tod-btn {
@@ -359,7 +448,12 @@ color: rgba(0, 0, 0, 0.5);
     left: 250px;
     right: 70%;
     bottom: -2100px;
+    background-color: black;
+    color: white;
     font-family: 'Space Grotesk', sans-serif;
+    font-size: 14pt;
+    border-radius: 12px;
+    opacity: 75%;
 }
 
 .today-btn {
@@ -367,23 +461,71 @@ color: rgba(0, 0, 0, 0.5);
     left: 69.79%;
     right: 16.32%;
     bottom: -2100px;
+    background-color: black;
+    color: white;
     font-family: 'Space Grotesk', sans-serif;
+    font-size: 14pt;
+    border-radius: 12px;
+    opacity: 75%;
 }
 
-.userprofile-link {
-    display : none;
-    font-family : 'Space Grotesk', sans-serif;
-}
-
-.profile-card {
+.create-icon {
     position: relative;
-    left: 200px;
-    top: 300px;
-    font-family: 'Space Grotesk', sans-serif;
+    position: relative;
+    top: -40px;
+    left: 48px;
 }
 
+.login-icon {
+    position: relative;
+    left: 212px;
+    top: 22px;
+}
 
+.ai {
+    font-style:normal;
+    color:purple;
+    font-weight:bold;
+    font-size:24px;
+    line-height:24px;
+}
 
+.ai.sun:before {
+    content:"\2609";
+}
+.ai.moon:before {
+    content:"\263D";
+}
+.ai.moon-variant:before {
+    content:"\263E";
+}
+.ai.earth:before {
+    content:"\2295";
+}
+.ai.mercury:before {
+    content:"\263F";
+}
+.ai.venus:before {
+    content:"\2640";
+}
+.ai.mars:before {
+    content:"\2642";
+}
+.ai.jupiter:before {
+    content:"\2643";
+}
+.ai.saturn:before {
+    content:"\2644";
+}
+.ai.uranus:before {
+    content:"\2645";
+}
+.ai.neptune:before {
+    content:"\2646";
+}
+.ai.pluto:before {
+    content:"\2647";
+}
 
 
 

@@ -3,27 +3,34 @@
 
 {% block body %}
   
-<div class="media-block-r">
+<div class="media-block-profile">
   <div class="media-box">
-  <div class="create-div"> Sign Up
+  <h3 class="profie-title">Sign Up</h3>
+  <div class="create-div"> 
+  <img class="create-icon" src="/static/images/moonicon.png">
   <form action="/users" method="POST">
-    <p>
-      Email <input type="text" name="email">
-    </p>
-
-    <p>
-      Phone Number <input type="tel" name="phone" id="phone">
-    </p>
-
-    <p>
-      Password <input type="password" name="password">
-
+    <p>Email </p>
       <p>
-        Confirm Password <input type="password" name="confirm-password">
+        <input type="text" name="email">
+      </p>
+
+      <p>Phone Number </p>
+    <p>
+       <input type="tel" name="phone" id="phone">
+    </p>
+
+    <p> Password </p>
+    <p>
+    <input type="password" name="password">
+    </p>
+
+    <p> Confirm Password </p>
+      <p>
+        <input type="password" name="confirm-password">
       </p>
     </p>
     <p>
-      <input type="submit">
+      <input class="btn btn-default btn-rounded mb-4" type="submit">
     </p>
   </form>
 </div>

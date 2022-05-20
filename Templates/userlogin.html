@@ -2,16 +2,20 @@
 {% block title %}Astrology Forecast{% endblock %}
 
 {% block body %}
-<div class="media-block-r">
+<div class="media-block-profile">
   <div class="media-box">
-<div class="login-div"> Log In
+  <h3 class="profie-title">Log In</h3>
+  <img class="login-icon" src="/static/images/moonicon.png">          
+<div class="login-div"> 
     <form action="/login" method="POST">
+      <p>Email </p>
       <p>
-        Email <input type="text" name="email">
+        <input type="text" name="email">
       </p>
   
+      <p>Password </p>
       <p>
-        Password <input type="password" name="password">
+      <input type="password" name="password">
       </p>
   
       <p>

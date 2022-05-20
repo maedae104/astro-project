@@ -4,25 +4,24 @@
 {% block body %}
 
 
-<h1>Welcome back {{ session["user_email"] }}</h1>
 
 <div class="media-block-profile">
   <div class="media-box">
-  
-</div>
-        <div class="profile-card">
-            <h3>{{ session["user_email"] }} profile details</h3>
-            <a href="/user-logout">Logout</a>
-                <ul>
-                Email: {{ session["user_email"] }}
+            <h3 class="profie-title">Profile details</h3>
+            <div class="profile-card"> 
+            <img class="icon" src="/static/images/moonicon.png">
+            <ul>
+                <p class="profile-text">Email: </p> {{ session["user_email"] }}
                 </ul>
                 <ul>
-                Phone number: {{ session['phone_number'] }}
-                </ul>
-                <ul>
-                    <button type="button" id="text-button">Send me a text update!</button>
+                  <p class="profile-text">Phone number: </p> {{ session['phone_number'] }}
                 </ul>
         </div>
+        <div class="text-button-div">
+        <ul>
+          <button type="button" id="text-button">Send me a text update!</button>
+      </ul>
+      </div>
       </div>
 
 

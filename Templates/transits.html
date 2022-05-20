@@ -3,9 +3,9 @@
 
 {% block body %}
 
-<div class="date-rectangle">
-<h3 class="today-date">Current Forecast for {{ current_date }} </h3>
-</div>
+
+<h3 class="today-date">Forecast for {{ current_date }} </h3>
+
 
 <div class="rectangle-1">
 <div class="sun-div">
@@ -19,8 +19,11 @@
 </div>
 
 <div class="rectangle-2">
-  <div class="aspects-div" id="aspects-id">
+    <div class="aspect-title-div">
     <h3 class="solar-aspect-title">Current Solar Aspects</h3>
+</div>
+  <div class="aspects-div" id="aspects-id">
+    
     <ul></ul>
 {% for aspect in sun_aspects %}
 <ul>  
@@ -33,11 +36,12 @@
 </div>
 </div>
 
+
 <div class="rectangle-3">
  <div class="eclipse-div" id="solar-eclipse-id">
         <h3 class="solar-ecl-title">Upcoming Solar Eclipse</h3>
-            <p class="solar-eclipse-text">
-             {{ sun_month }} {{ sun_day }} {{ sun_year }}
+            <p class="lunar-ecl-text">
+             October {{ sun_day }} {{ sun_year }}
             </p>
         </ul>
 </div>
@@ -56,8 +60,10 @@
 </div>
 
 <div class="rectangle-5">
+    <div class="aspect-title-div">
+        <h3 class="moon-aspects-title">Current Lunar Aspects</h3>
+    </div>
 <div class="aspects-div" id="lunar-aspects-id">
-    <h3 class="moon-aspects-title">Current Lunar Aspects</h3>
     {% for moon_aspect in moon_aspects %}
     <ul>
         <p class="moon-aspects-text">
@@ -75,7 +81,7 @@
         <h3 class="lunar-ecl-title">Upcoming Lunar Eclipse</h3>
         <ul>
             <p class="lunar-ecl-text">
-            {{ moon_month }} {{ moon_day }} {{ moon_year }}
+            November {{ moon_day }} {{ moon_year }}
             </p>
         </ul>
 </div>
@@ -102,7 +108,8 @@
                 Saturn is in <b>{{ sat_sign }} </b>  
             </ul>
         </p>
-</div></div>
+</div>
+</div>
 </div>
 
 <div class="media-block-l">
